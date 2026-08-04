@@ -1,0 +1,33 @@
+# Generated build outputs
+build/
+*.o
+*.obj
+*.a
+*.so*
+*.dll
+*.exe
+*.out
+*.db
+*.log
+*.ttf
+
+# Editor and operating-system files
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Temporary archives and backups
+*.bak
+*.tmp
+*.tar.gz
+*.zip
+*.rar
+backup_*/
+release/
+
+# Required historical ARM FreeType libraries; license texts are stored beside them.
+!01-lvgl-ticket-terminal/freetypelib/lib/libfreetype.a
+!02-gec6818-clinic-terminal/reference/six/six/freetypelib/lib/libfreetype.*

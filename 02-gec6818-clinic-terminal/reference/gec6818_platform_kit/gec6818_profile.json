@@ -1,0 +1,1544 @@
+{
+  "schema_version": "1.1.0",
+  "generated_at": "2026-07-13T18:47:36+08:00",
+  "status_definitions": {
+    "confirmed-runtime": "Directly confirmed by execution in the environment named by scope. Only board and toolchain scopes are eligible for platform-critical gates.",
+    "confirmed-source": "Confirmed directly by retained source/configuration, but not necessarily true of the real board.",
+    "inferred": "Derived from evidence or adopted as a recommendation, but not runtime-confirmed.",
+    "unknown": "Not currently confirmed. The value must not be used as a hardware fact."
+  },
+  "scope_definitions": {
+    "board": "Direct evidence from the selected real GEC6818 board and its current rootfs.",
+    "toolchain": "Direct evidence from commands run against a named cross-compiler in the VMware toolchain host.",
+    "host-backend": "Non-platform reference evidence from the host medical backend; it can never satisfy a board or toolchain gate."
+  },
+  "board": {
+    "board_name": {
+      "name": "board_name",
+      "value": "GEC6818",
+      "status": "confirmed-source",
+      "source": "platform-kit task specification and .scratch/智慧医疗终端/PRD.md",
+      "risk": "The commercial board name does not identify the exact SoC revision, boot image, or attached LCD variant.",
+      "verification_command": "cat /proc/cpuinfo"
+    },
+    "soc": {
+      "name": "soc",
+      "value": null,
+      "status": "unknown",
+      "source": "No successful board probe is available.",
+      "risk": "Compiler architecture flags and peripheral assumptions cannot be selected from the board name alone.",
+      "verification_command": "cat /proc/cpuinfo"
+    },
+    "cpu_model": {
+      "name": "cpu_model",
+      "value": null,
+      "status": "unknown",
+      "source": "No successful board probe is available.",
+      "risk": "CPU feature and tuning flags remain unverified.",
+      "verification_command": "grep -E '^(model name|Processor|Hardware|Features)' /proc/cpuinfo"
+    },
+    "cpu_architecture": {
+      "name": "cpu_architecture",
+      "value": null,
+      "status": "unknown",
+      "source": "No successful board probe is available.",
+      "risk": "Do not infer ARM generation or instruction-set support from compiler names or old binaries.",
+      "verification_command": "uname -m"
+    }
+  },
+  "operating_system": {
+    "uname_all": {
+      "name": "uname_all",
+      "value": null,
+      "status": "unknown",
+      "source": "No successful board probe is available.",
+      "risk": "Kernel capabilities and driver behavior may differ from the archived project environment.",
+      "verification_command": "uname -a"
+    },
+    "kernel_architecture": {
+      "name": "kernel_architecture",
+      "value": null,
+      "status": "unknown",
+      "source": "No successful board probe is available.",
+      "risk": "A compiler triplet is not proof of the board kernel architecture.",
+      "verification_command": "uname -m"
+    },
+    "userspace_bits": {
+      "name": "userspace_bits",
+      "value": null,
+      "status": "unknown",
+      "source": "No successful board probe is available.",
+      "risk": "Pointer size and target-library selection remain unverified.",
+      "verification_command": "getconf LONG_BIT"
+    },
+    "distribution": {
+      "name": "distribution",
+      "value": null,
+      "status": "unknown",
+      "source": "No successful board probe is available.",
+      "risk": "Package layout and startup facilities may differ across board images.",
+      "verification_command": "cat /etc/os-release"
+    },
+    "libc": {
+      "name": "libc",
+      "value": null,
+      "status": "unknown",
+      "source": "No successful board probe is available.",
+      "risk": "Old FreeType binaries cannot be assumed compatible with an unknown target libc.",
+      "verification_command": "ldd --version"
+    },
+    "busybox": {
+      "name": "busybox",
+      "value": null,
+      "status": "unknown",
+      "source": "No successful board probe is available.",
+      "risk": "Available command options may differ from full GNU userland.",
+      "verification_command": "busybox 2>&1 | head -n 2"
+    },
+    "buildroot": {
+      "name": "buildroot",
+      "value": null,
+      "status": "unknown",
+      "source": "A retained shared library contains a Buildroot compiler note, which is not proof of the current board image.",
+      "risk": "Treating an artifact's build note as the running OS identity would be a false runtime claim.",
+      "verification_command": "cat /etc/os-release"
+    },
+    "runtime_identity": {
+      "name": "runtime_identity",
+      "value": null,
+      "status": "unknown",
+      "source": "No successful board probe is available.",
+      "risk": "Device-node and deployment permissions depend on the actual account and groups.",
+      "verification_command": "id"
+    },
+    "mounts": {
+      "name": "mounts",
+      "value": null,
+      "status": "unknown",
+      "source": "No successful board probe is available.",
+      "risk": "Writable and persistent storage locations are not known.",
+      "verification_command": "mount"
+    },
+    "filesystem_capacity": {
+      "name": "filesystem_capacity",
+      "value": null,
+      "status": "unknown",
+      "source": "No successful board probe is available.",
+      "risk": "A full-screen draw buffer, font files, logs, and application data may exceed available space or memory.",
+      "verification_command": "df -h"
+    },
+    "framebuffer_nodes": {
+      "name": "framebuffer_nodes",
+      "value": null,
+      "status": "unknown",
+      "source": "The old source names /dev/fb0, but the running board has not been listed.",
+      "risk": "The old default may point to a missing or different display device.",
+      "verification_command": "ls -l /dev/fb*"
+    },
+    "input_event_nodes": {
+      "name": "input_event_nodes",
+      "value": null,
+      "status": "unknown",
+      "source": "The old source names /dev/input/event0, but the running board has not been listed.",
+      "risk": "Event numbering is not stable across kernels, device order, or board images.",
+      "verification_command": "ls -l /dev/input/event*"
+    }
+  },
+  "toolchains": {
+    "selected_compiler": {
+      "name": "selected_compiler",
+      "value": null,
+      "status": "unknown",
+      "source": "All three candidates were probed in VMware on 2026-07-13, but no candidate was selected because board/rootfs compatibility is still unknown.",
+      "risk": "Successful metadata and compile-only probes do not select a compiler or prove board compatibility.",
+      "verification_command": "sh scripts/probe_toolchain.sh"
+    },
+    "selected_dumpmachine": {
+      "name": "selected_dumpmachine",
+      "value": null,
+      "status": "unknown",
+      "source": "Candidate triplets were confirmed, but no compiler has been selected for the board.",
+      "risk": "The selected target must remain unknown until compiler and board/rootfs compatibility are matched.",
+      "verification_command": "<selected-compiler> -dumpmachine"
+    },
+    "selected_sysroot": {
+      "name": "selected_sysroot",
+      "value": null,
+      "status": "unknown",
+      "source": "Candidate sysroot outputs were confirmed, but no compiler/sysroot pair has been selected for the board.",
+      "risk": "Existing directories and preprocessing success do not prove that libc, startup objects, and libraries match the board rootfs.",
+      "verification_command": "<selected-compiler> -print-sysroot"
+    },
+    "selected_default_architecture": {
+      "name": "selected_default_architecture",
+      "value": null,
+      "status": "unknown",
+      "source": "Candidate defaults were confirmed independently, but selection is deferred until board CPU/rootfs evidence exists.",
+      "risk": "Candidate 1 defaults to Cortex-A15 while candidates 2 and 3 default to ARMv5T; neither may be chosen from this difference alone.",
+      "verification_command": "<selected-compiler> -Q --help=target"
+    },
+    "selected_abi": {
+      "name": "selected_abi",
+      "value": null,
+      "status": "unknown",
+      "source": "Candidate object ABI evidence was collected, but no final ABI was selected for the board.",
+      "risk": "EABI5 object metadata does not prove target libc or complete calling-convention compatibility.",
+      "verification_command": "<selected-compiler> -dumpmachine && <selected-compiler> -Q --help=target"
+    },
+    "selected_float_abi": {
+      "name": "selected_float_abi",
+      "value": null,
+      "status": "unknown",
+      "source": "All candidates reported a soft default and accepted soft/softfp/hard in compile-only tests, but no final float ABI was selected.",
+      "risk": "Flag acceptance does not prove that a matching libc and libraries exist; soft, softfp, and hard-float objects may be link-incompatible.",
+      "verification_command": "sh scripts/probe_toolchain.sh"
+    },
+    "candidates": [
+      {
+        "candidate_id": "local_arm_5_4_0",
+        "compiler_path": {
+          "name": "compiler_path",
+          "value": "/usr/local/arm/5.4.0/usr/bin/arm-none-linux-gnueabi-gcc",
+          "status": "confirmed-runtime",
+          "scope": "toolchain",
+          "source": "evidence/toolchain_probe_vmware_20260713T103421Z.log, compiler candidate 1",
+          "risk": "The executable exists and ran in VMware, but this does not select it or prove board/rootfs compatibility.",
+          "verification_command": "test -x /usr/local/arm/5.4.0/usr/bin/arm-none-linux-gnueabi-gcc && /usr/local/arm/5.4.0/usr/bin/arm-none-linux-gnueabi-gcc --version"
+        },
+        "resolved_path": {
+          "name": "resolved_path",
+          "value": "/usr/local/arm/5.4.0/usr/bin/arm-none-linux-gnueabi-gcc",
+          "status": "confirmed-runtime",
+          "scope": "toolchain",
+          "source": "evidence/toolchain_probe_vmware_20260713T103421Z.log, candidate 1 resolved_path",
+          "risk": "The configured executable is a wrapper entry point rather than the underlying compiler binary.",
+          "verification_command": "command -v /usr/local/arm/5.4.0/usr/bin/arm-none-linux-gnueabi-gcc"
+        },
+        "actual_path": {
+          "name": "actual_path",
+          "value": "/usr/local/arm/5.4.0/usr/bin/toolchain-wrapper",
+          "status": "confirmed-runtime",
+          "scope": "toolchain",
+          "source": "evidence/toolchain_probe_vmware_20260713T103421Z.log, candidate 1 actual_path",
+          "risk": "Wrapper behavior is part of the toolchain identity and must remain available when reproducing the build.",
+          "verification_command": "readlink -f /usr/local/arm/5.4.0/usr/bin/arm-none-linux-gnueabi-gcc"
+        },
+        "exists": {
+          "name": "exists",
+          "value": true,
+          "status": "confirmed-runtime",
+          "scope": "toolchain",
+          "source": "evidence/toolchain_probe_vmware_20260713T103421Z.log, candidate 1 availability",
+          "risk": "Existence on this VMware image does not prove availability on another host.",
+          "verification_command": "test -x /usr/local/arm/5.4.0/usr/bin/arm-none-linux-gnueabi-gcc"
+        },
+        "version": {
+          "name": "version",
+          "value": "arm-none-linux-gnueabi-gcc.br_real (Buildroot 2016.11) 5.4.0",
+          "status": "confirmed-runtime",
+          "scope": "toolchain",
+          "source": "evidence/toolchain_probe_vmware_20260713T103421Z.log, candidate 1 --version",
+          "risk": "Version confirmation does not prove board libc or FreeType compatibility.",
+          "verification_command": "/usr/local/arm/5.4.0/usr/bin/arm-none-linux-gnueabi-gcc --version"
+        },
+        "dumpmachine": {
+          "name": "dumpmachine",
+          "value": "arm-none-linux-gnueabi",
+          "status": "confirmed-runtime",
+          "scope": "toolchain",
+          "source": "evidence/toolchain_probe_vmware_20260713T103421Z.log, candidate 1 -dumpmachine",
+          "risk": "The triplet identifies the compiler target, not the running board rootfs.",
+          "verification_command": "/usr/local/arm/5.4.0/usr/bin/arm-none-linux-gnueabi-gcc -dumpmachine"
+        },
+        "sysroot": {
+          "name": "sysroot",
+          "value": "/usr/local/arm/5.4.0/usr/arm-none-linux-gnueabi/sysroot",
+          "status": "confirmed-runtime",
+          "scope": "toolchain",
+          "source": "evidence/toolchain_probe_vmware_20260713T103421Z.log, candidate 1 -print-sysroot; directory exists",
+          "risk": "Directory existence and preprocessing success do not prove that this sysroot matches the board rootfs or contains every link dependency.",
+          "verification_command": "/usr/local/arm/5.4.0/usr/bin/arm-none-linux-gnueabi-gcc -print-sysroot"
+        },
+        "include_search_paths": {
+          "name": "include_search_paths",
+          "value": [
+            "/usr/local/arm/5.4.0/usr/bin/../lib/gcc/arm-none-linux-gnueabi/5.4.0/include",
+            "/usr/local/arm/5.4.0/usr/bin/../lib/gcc/arm-none-linux-gnueabi/5.4.0/include-fixed",
+            "/usr/local/arm/5.4.0/usr/bin/../lib/gcc/arm-none-linux-gnueabi/5.4.0/../../../../arm-none-linux-gnueabi/include",
+            "/usr/local/arm/5.4.0/usr/arm-none-linux-gnueabi/sysroot/usr/include"
+          ],
+          "status": "confirmed-runtime",
+          "scope": "toolchain",
+          "source": "evidence/toolchain_probe_vmware_20260713T103421Z.log, candidate 1 preprocessing include search",
+          "risk": "Search paths were observed for preprocessing only; they do not prove link or board runtime compatibility.",
+          "verification_command": "printf '#include <stddef.h>\\n' | /usr/local/arm/5.4.0/usr/bin/arm-none-linux-gnueabi-gcc -E -x c -v - >/dev/null"
+        },
+        "libgcc_path": {
+          "name": "libgcc_path",
+          "value": "/usr/local/arm/5.4.0/usr/bin/../lib/gcc/arm-none-linux-gnueabi/5.4.0/libgcc.a",
+          "status": "confirmed-runtime",
+          "scope": "toolchain",
+          "source": "evidence/toolchain_probe_vmware_20260713T103421Z.log, candidate 1 -print-libgcc-file-name",
+          "risk": "An archive path and ARM/EABI metadata do not prove compatibility with the board rootfs libraries.",
+          "verification_command": "/usr/local/arm/5.4.0/usr/bin/arm-none-linux-gnueabi-gcc -print-libgcc-file-name"
+        },
+        "default_architecture": {
+          "name": "default_architecture",
+          "value": "Cortex-A15, ARM mode",
+          "status": "confirmed-runtime",
+          "scope": "toolchain",
+          "source": "evidence/toolchain_probe_vmware_20260713T103421Z.log, candidate 1 configured options and COLLECT_GCC_OPTIONS",
+          "risk": "This is the compiler default, not confirmation of the GEC6818 board CPU or an approved tuning choice.",
+          "verification_command": "/usr/local/arm/5.4.0/usr/bin/arm-none-linux-gnueabi-gcc -Q --help=target"
+        },
+        "abi": {
+          "name": "abi",
+          "value": "AAPCS-Linux default; compile-only objects are ELF32 ARM EABI5",
+          "status": "confirmed-runtime",
+          "scope": "toolchain",
+          "source": "evidence/toolchain_probe_vmware_20260713T103421Z.log, candidate 1 configured --with-abi and compile-only file output",
+          "risk": "Compiler/object ABI confirmation does not prove that the board libc and all target libraries use the same ABI.",
+          "verification_command": "sh scripts/probe_toolchain.sh"
+        },
+        "float_abi": {
+          "name": "float_abi",
+          "value": "soft",
+          "status": "confirmed-runtime",
+          "scope": "toolchain",
+          "source": "evidence/toolchain_probe_vmware_20260713T103421Z.log, candidate 1 -Q target state and __SOFTFP__ macro",
+          "risk": "The compiler accepted softfp and hard in -c tests, but no matching sysroot libraries or links were verified for those modes.",
+          "verification_command": "sh scripts/probe_toolchain.sh"
+        },
+        "compile_only_test": {
+          "name": "compile_only_test",
+          "value": {"default": "pass", "soft": "pass", "softfp": "pass", "hard": "pass", "object_format": "ELF32 ARM EABI5"},
+          "status": "confirmed-runtime",
+          "scope": "toolchain",
+          "source": "evidence/toolchain_probe_vmware_20260713T103421Z.log, candidate 1 compile-only results",
+          "risk": "These tests prove front-end/assembler acceptance only; no link, libc, FreeType, LVGL, or board execution was attempted.",
+          "verification_command": "sh scripts/probe_toolchain.sh"
+        },
+        "recommended_use": {
+          "name": "recommended_use",
+          "value": "candidate for later board/rootfs compatibility comparison; not selected",
+          "status": "inferred",
+          "source": "The probe confirmed a dedicated Buildroot sysroot and Cortex-A15/soft defaults, but the board/rootfs has not been probed.",
+          "risk": "Selecting it now would still guess board and rootfs compatibility.",
+          "verification_command": "sh scripts/probe_toolchain.sh"
+        },
+        "old_freetype_compatibility": {
+          "name": "old_freetype_compatibility",
+          "value": null,
+          "status": "unknown",
+          "source": "Candidate 1 and old shared FreeType have similar Buildroot 5.4/Cortex-A15 metadata, but no compatibility link or board check was performed.",
+          "risk": "Similar compiler metadata is not compatibility proof; old libraries remain prohibited reuse inputs.",
+          "verification_command": "Rebuild FreeType with the selected compiler and selected sysroot; do not link-test the archived binary."
+        }
+      },
+      {
+        "candidate_id": "system_arm_linux_gnueabi",
+        "compiler_path": {
+          "name": "compiler_path",
+          "value": "/usr/bin/arm-linux-gnueabi-gcc",
+          "status": "confirmed-runtime",
+          "scope": "toolchain",
+          "source": "evidence/toolchain_probe_vmware_20260713T103421Z.log, compiler candidate 2",
+          "risk": "The executable exists and ran in VMware, but this does not select it or prove board/rootfs compatibility.",
+          "verification_command": "test -x /usr/bin/arm-linux-gnueabi-gcc && /usr/bin/arm-linux-gnueabi-gcc --version"
+        },
+        "resolved_path": {
+          "name": "resolved_path",
+          "value": "/usr/bin/arm-linux-gnueabi-gcc",
+          "status": "confirmed-runtime",
+          "scope": "toolchain",
+          "source": "evidence/toolchain_probe_vmware_20260713T103421Z.log, candidate 2 resolved_path",
+          "risk": "This frontend resolves to a versioned Ubuntu cross-compiler binary.",
+          "verification_command": "command -v /usr/bin/arm-linux-gnueabi-gcc"
+        },
+        "actual_path": {
+          "name": "actual_path",
+          "value": "/usr/bin/arm-linux-gnueabi-gcc-9",
+          "status": "confirmed-runtime",
+          "scope": "toolchain",
+          "source": "evidence/toolchain_probe_vmware_20260713T103421Z.log, candidate 2 actual_path",
+          "risk": "A distribution upgrade can change the versioned target behind the unversioned path.",
+          "verification_command": "readlink -f /usr/bin/arm-linux-gnueabi-gcc"
+        },
+        "exists": {
+          "name": "exists",
+          "value": true,
+          "status": "confirmed-runtime",
+          "scope": "toolchain",
+          "source": "evidence/toolchain_probe_vmware_20260713T103421Z.log, candidate 2 availability",
+          "risk": "Existence on this VMware image does not prove availability on another host.",
+          "verification_command": "test -x /usr/bin/arm-linux-gnueabi-gcc"
+        },
+        "version": {
+          "name": "version",
+          "value": "arm-linux-gnueabi-gcc (Ubuntu 9.4.0-1ubuntu1~20.04.2) 9.4.0",
+          "status": "confirmed-runtime",
+          "scope": "toolchain",
+          "source": "evidence/toolchain_probe_vmware_20260713T103421Z.log, candidate 2 --version",
+          "risk": "Version confirmation does not prove board libc or FreeType compatibility.",
+          "verification_command": "/usr/bin/arm-linux-gnueabi-gcc --version"
+        },
+        "dumpmachine": {
+          "name": "dumpmachine",
+          "value": "arm-linux-gnueabi",
+          "status": "confirmed-runtime",
+          "scope": "toolchain",
+          "source": "evidence/toolchain_probe_vmware_20260713T103421Z.log, candidate 2 -dumpmachine",
+          "risk": "The triplet identifies the compiler target, not the running board rootfs.",
+          "verification_command": "/usr/bin/arm-linux-gnueabi-gcc -dumpmachine"
+        },
+        "sysroot": {
+          "name": "sysroot",
+          "value": "/",
+          "status": "confirmed-runtime",
+          "scope": "toolchain",
+          "source": "evidence/toolchain_probe_vmware_20260713T103421Z.log, candidate 2 -print-sysroot; directory exists",
+          "risk": "A root sysroot uses Ubuntu multiarch cross packages and is not proof of a dedicated board-compatible rootfs.",
+          "verification_command": "/usr/bin/arm-linux-gnueabi-gcc -print-sysroot"
+        },
+        "include_search_paths": {
+          "name": "include_search_paths",
+          "value": [
+            "/usr/lib/gcc-cross/arm-linux-gnueabi/9/include",
+            "/usr/lib/gcc-cross/arm-linux-gnueabi/9/../../../../arm-linux-gnueabi/include",
+            "/usr/include"
+          ],
+          "status": "confirmed-runtime",
+          "scope": "toolchain",
+          "source": "evidence/toolchain_probe_vmware_20260713T103421Z.log, candidate 2 preprocessing include search",
+          "risk": "Search paths were observed for preprocessing only; /usr/include participation increases the need to verify multiarch target headers and avoid host-library leakage.",
+          "verification_command": "printf '#include <stddef.h>\\n' | /usr/bin/arm-linux-gnueabi-gcc -E -x c -v - >/dev/null"
+        },
+        "libgcc_path": {
+          "name": "libgcc_path",
+          "value": "/usr/lib/gcc-cross/arm-linux-gnueabi/9/libgcc.a",
+          "status": "confirmed-runtime",
+          "scope": "toolchain",
+          "source": "evidence/toolchain_probe_vmware_20260713T103421Z.log, candidate 2 -print-libgcc-file-name",
+          "risk": "An archive path and ARM/EABI metadata do not prove compatibility with the board rootfs libraries.",
+          "verification_command": "/usr/bin/arm-linux-gnueabi-gcc -print-libgcc-file-name"
+        },
+        "default_architecture": {
+          "name": "default_architecture",
+          "value": "ARMv5T, ARM mode",
+          "status": "confirmed-runtime",
+          "scope": "toolchain",
+          "source": "evidence/toolchain_probe_vmware_20260713T103421Z.log, candidate 2 configured options and COLLECT_GCC_OPTIONS",
+          "risk": "This generic default is not confirmation of the GEC6818 board CPU or an approved performance choice.",
+          "verification_command": "/usr/bin/arm-linux-gnueabi-gcc -Q --help=target"
+        },
+        "abi": {
+          "name": "abi",
+          "value": "arm-linux-gnueabi target; compile-only objects are ELF32 ARM EABI5",
+          "status": "confirmed-runtime",
+          "scope": "toolchain",
+          "source": "evidence/toolchain_probe_vmware_20260713T103421Z.log, candidate 2 dumpmachine and compile-only file output",
+          "risk": "EABI5 object confirmation does not prove that the board libc and all target libraries use compatible calling conventions.",
+          "verification_command": "sh scripts/probe_toolchain.sh"
+        },
+        "float_abi": {
+          "name": "float_abi",
+          "value": "soft",
+          "status": "confirmed-runtime",
+          "scope": "toolchain",
+          "source": "evidence/toolchain_probe_vmware_20260713T103421Z.log, candidate 2 -Q target state and __SOFTFP__ macro",
+          "risk": "The compiler accepted softfp and hard in -c tests, but no matching sysroot libraries or links were verified for those modes.",
+          "verification_command": "sh scripts/probe_toolchain.sh"
+        },
+        "compile_only_test": {
+          "name": "compile_only_test",
+          "value": {"default": "pass", "soft": "pass", "softfp": "pass", "hard": "pass", "object_format": "ELF32 ARM EABI5"},
+          "status": "confirmed-runtime",
+          "scope": "toolchain",
+          "source": "evidence/toolchain_probe_vmware_20260713T103421Z.log, candidate 2 compile-only results",
+          "risk": "These tests prove front-end/assembler acceptance only; no link, libc, FreeType, LVGL, or board execution was attempted.",
+          "verification_command": "sh scripts/probe_toolchain.sh"
+        },
+        "recommended_use": {
+          "name": "recommended_use",
+          "value": "generic Ubuntu cross-compiler candidate; not selected",
+          "status": "inferred",
+          "source": "The probe confirmed Ubuntu GCC 9.4, ARMv5T/soft defaults, and a root sysroot; the board/rootfs has not been probed.",
+          "risk": "Selecting it now would still guess board and rootfs compatibility and could mix unsuitable multiarch host packages.",
+          "verification_command": "sh scripts/probe_toolchain.sh"
+        },
+        "old_freetype_compatibility": {
+          "name": "old_freetype_compatibility",
+          "value": null,
+          "status": "unknown",
+          "source": "Candidate 2 and old static FreeType share GCC 9.4/ARMv5T metadata, but no compatibility link or board check was performed.",
+          "risk": "Similar compiler metadata is not compatibility proof; old libraries remain prohibited reuse inputs.",
+          "verification_command": "Rebuild FreeType with the selected compiler and selected sysroot; do not link-test the archived binary."
+        }
+      },
+      {
+        "candidate_id": "old_make_short_name",
+        "compiler_path": {
+          "name": "compiler_path",
+          "value": "arm-linux-gcc",
+          "status": "confirmed-runtime",
+          "scope": "toolchain",
+          "source": "evidence/toolchain_probe_vmware_20260713T103421Z.log, compiler candidate 3",
+          "risk": "The short name currently exists, but PATH changes can resolve it differently; it is not a reproducible selected compiler path.",
+          "verification_command": "command -v arm-linux-gcc"
+        },
+        "resolved_path": {
+          "name": "resolved_path",
+          "value": "/usr/bin/arm-linux-gcc",
+          "status": "confirmed-runtime",
+          "scope": "toolchain",
+          "source": "evidence/toolchain_probe_vmware_20260713T103421Z.log, candidate 3 resolved_path",
+          "risk": "This PATH alias is host-specific and should not be copied as an absolute project selection without re-probing.",
+          "verification_command": "command -v arm-linux-gcc"
+        },
+        "actual_path": {
+          "name": "actual_path",
+          "value": "/usr/bin/arm-linux-gnueabi-gcc-9",
+          "status": "confirmed-runtime",
+          "scope": "toolchain",
+          "source": "evidence/toolchain_probe_vmware_20260713T103421Z.log, candidate 3 actual_path",
+          "risk": "The short command is only an alias of candidate 2, not an independent toolchain.",
+          "verification_command": "readlink -f \"$(command -v arm-linux-gcc)\""
+        },
+        "exists": {
+          "name": "exists",
+          "value": true,
+          "status": "confirmed-runtime",
+          "scope": "toolchain",
+          "source": "evidence/toolchain_probe_vmware_20260713T103421Z.log, candidate 3 availability",
+          "risk": "Existence is confirmed only for the current VMware PATH.",
+          "verification_command": "command -v arm-linux-gcc"
+        },
+        "version": {
+          "name": "version",
+          "value": "arm-linux-gcc (Ubuntu 9.4.0-1ubuntu1~20.04.2) 9.4.0",
+          "status": "confirmed-runtime",
+          "scope": "toolchain",
+          "source": "evidence/toolchain_probe_vmware_20260713T103421Z.log, candidate 3 --version",
+          "risk": "The alias can resolve differently when PATH or packages change.",
+          "verification_command": "arm-linux-gcc --version"
+        },
+        "dumpmachine": {
+          "name": "dumpmachine",
+          "value": "arm-linux-gnueabi",
+          "status": "confirmed-runtime",
+          "scope": "toolchain",
+          "source": "evidence/toolchain_probe_vmware_20260713T103421Z.log, candidate 3 -dumpmachine",
+          "risk": "The triplet identifies the aliased compiler target, not the running board rootfs.",
+          "verification_command": "arm-linux-gcc -dumpmachine"
+        },
+        "sysroot": {
+          "name": "sysroot",
+          "value": "/",
+          "status": "confirmed-runtime",
+          "scope": "toolchain",
+          "source": "evidence/toolchain_probe_vmware_20260713T103421Z.log, candidate 3 -print-sysroot; directory exists",
+          "risk": "A root sysroot uses Ubuntu multiarch cross packages and is not proof of a dedicated board-compatible rootfs.",
+          "verification_command": "arm-linux-gcc -print-sysroot"
+        },
+        "include_search_paths": {
+          "name": "include_search_paths",
+          "value": [
+            "/usr/lib/gcc-cross/arm-linux-gnueabi/9/include",
+            "/usr/lib/gcc-cross/arm-linux-gnueabi/9/../../../../arm-linux-gnueabi/include",
+            "/usr/include"
+          ],
+          "status": "confirmed-runtime",
+          "scope": "toolchain",
+          "source": "evidence/toolchain_probe_vmware_20260713T103421Z.log, candidate 3 preprocessing include search",
+          "risk": "Search paths were observed for preprocessing only; this alias inherits candidate 2's multiarch host-path risks.",
+          "verification_command": "printf '#include <stddef.h>\\n' | arm-linux-gcc -E -x c -v - >/dev/null"
+        },
+        "libgcc_path": {
+          "name": "libgcc_path",
+          "value": "/usr/lib/gcc-cross/arm-linux-gnueabi/9/libgcc.a",
+          "status": "confirmed-runtime",
+          "scope": "toolchain",
+          "source": "evidence/toolchain_probe_vmware_20260713T103421Z.log, candidate 3 -print-libgcc-file-name",
+          "risk": "The alias shares candidate 2's archive; ARM/EABI metadata does not prove board rootfs compatibility.",
+          "verification_command": "arm-linux-gcc -print-libgcc-file-name"
+        },
+        "default_architecture": {
+          "name": "default_architecture",
+          "value": "ARMv5T, ARM mode",
+          "status": "confirmed-runtime",
+          "scope": "toolchain",
+          "source": "evidence/toolchain_probe_vmware_20260713T103421Z.log, candidate 3 configured options and COLLECT_GCC_OPTIONS",
+          "risk": "This alias inherits candidate 2's generic compiler default and is not confirmation of the GEC6818 board CPU.",
+          "verification_command": "arm-linux-gcc -Q --help=target"
+        },
+        "abi": {
+          "name": "abi",
+          "value": "arm-linux-gnueabi target; compile-only objects are ELF32 ARM EABI5",
+          "status": "confirmed-runtime",
+          "scope": "toolchain",
+          "source": "evidence/toolchain_probe_vmware_20260713T103421Z.log, candidate 3 dumpmachine and compile-only file output",
+          "risk": "EABI5 object confirmation does not prove that the board libc and all target libraries use compatible calling conventions.",
+          "verification_command": "sh scripts/probe_toolchain.sh"
+        },
+        "float_abi": {
+          "name": "float_abi",
+          "value": "soft",
+          "status": "confirmed-runtime",
+          "scope": "toolchain",
+          "source": "evidence/toolchain_probe_vmware_20260713T103421Z.log, candidate 3 -Q target state and __SOFTFP__ macro",
+          "risk": "The compiler accepted softfp and hard in -c tests, but no matching sysroot libraries or links were verified for those modes.",
+          "verification_command": "sh scripts/probe_toolchain.sh"
+        },
+        "compile_only_test": {
+          "name": "compile_only_test",
+          "value": {"default": "pass", "soft": "pass", "softfp": "pass", "hard": "pass", "object_format": "ELF32 ARM EABI5"},
+          "status": "confirmed-runtime",
+          "scope": "toolchain",
+          "source": "evidence/toolchain_probe_vmware_20260713T103421Z.log, candidate 3 compile-only results",
+          "risk": "These tests prove front-end/assembler acceptance only; no link, libc, FreeType, LVGL, or board execution was attempted.",
+          "verification_command": "sh scripts/probe_toolchain.sh"
+        },
+        "recommended_use": {
+          "name": "recommended_use",
+          "value": "do not select by short name; it is an alias of candidate 2",
+          "status": "inferred",
+          "source": "The probe resolved arm-linux-gcc to /usr/bin/arm-linux-gnueabi-gcc-9.",
+          "risk": "It can silently select a different compiler if PATH or packages change; prefer a confirmed explicit path after selection.",
+          "verification_command": "command -v arm-linux-gcc && readlink -f \"$(command -v arm-linux-gcc)\""
+        },
+        "old_freetype_compatibility": {
+          "name": "old_freetype_compatibility",
+          "value": null,
+          "status": "unknown",
+          "source": "Candidate 3 is only an alias of candidate 2; no old FreeType compatibility link or board check was performed.",
+          "risk": "No old FreeType artifact is approved for reuse despite similar compiler metadata.",
+          "verification_command": "Rebuild FreeType after selecting and confirming the final toolchain."
+        }
+      }
+    ]
+  },
+  "display": {
+    "old_logical_width": {
+      "name": "old_logical_width",
+      "value": 800,
+      "status": "confirmed-source",
+      "source": "reference/six/six/src/core/main.c:37,62",
+      "risk": "This is the archived application's logical resolution, not a framebuffer runtime measurement.",
+      "verification_command": "fbset -fb /dev/fb0 -i"
+    },
+    "old_logical_height": {
+      "name": "old_logical_height",
+      "value": 480,
+      "status": "confirmed-source",
+      "source": "reference/six/six/src/core/main.c:37,63",
+      "risk": "This is the archived application's logical resolution, not a framebuffer runtime measurement.",
+      "verification_command": "fbset -fb /dev/fb0 -i"
+    },
+    "old_default_device": {
+      "name": "old_default_device",
+      "value": "/dev/fb0",
+      "status": "confirmed-source",
+      "source": "reference/six/six/lv_drv_conf.h:323",
+      "risk": "The real board device node has not been confirmed.",
+      "verification_command": "ls -l /dev/fb*"
+    },
+    "old_lvgl_color_depth": {
+      "name": "old_lvgl_color_depth",
+      "value": 32,
+      "status": "confirmed-source",
+      "source": "reference/six/six/lv_conf.h:33",
+      "risk": "LVGL color depth must match or be explicitly converted to the real framebuffer format.",
+      "verification_command": "cat /sys/class/graphics/fb0/bits_per_pixel"
+    },
+    "old_draw_buffer_count": {
+      "name": "old_draw_buffer_count",
+      "value": 1,
+      "status": "confirmed-source",
+      "source": "reference/six/six/src/core/main.c:55-57",
+      "risk": "A single buffer avoids double-buffer allocation but the full-screen size may be excessive for the target memory budget.",
+      "verification_command": "grep -n 'lv_disp_draw_buf_init' reference/six/six/src/core/main.c"
+    },
+    "old_draw_buffer_pixels": {
+      "name": "old_draw_buffer_pixels",
+      "value": 384000,
+      "status": "confirmed-source",
+      "source": "reference/six/six/src/core/main.c:37,55",
+      "risk": "At 32-bit color this consumes about 1.46 MiB and may not be the best target configuration.",
+      "verification_command": "grep -n 'DISP_BUF_SIZE' reference/six/six/src/core/main.c"
+    },
+    "old_draw_buffer_bytes_at_32bpp": {
+      "name": "old_draw_buffer_bytes_at_32bpp",
+      "value": 1536000,
+      "status": "inferred",
+      "source": "Derived from 800 * 480 * 4 bytes.",
+      "risk": "The value changes if LVGL color depth or buffer height changes.",
+      "verification_command": "python3 -c 'print(800*480*4)'"
+    },
+    "old_flush_uses_line_length": {
+      "name": "old_flush_uses_line_length",
+      "value": true,
+      "status": "confirmed-source",
+      "source": "reference/six/six/lv_drivers/display/fbdev.c:203,213,223",
+      "risk": "The 24bpp branch still incorrectly divides line_length by 4 and copies four bytes per pixel.",
+      "verification_command": "grep -n 'line_length' reference/six/six/lv_drivers/display/fbdev.c"
+    },
+    "runtime_device": {
+      "name": "runtime_device",
+      "value": null,
+      "status": "unknown",
+      "source": "No board probe output is available.",
+      "risk": "The bootstrap must not silently use /dev/fb0.",
+      "verification_command": "ls -l /dev/fb*"
+    },
+    "runtime_width": {
+      "name": "runtime_width",
+      "value": null,
+      "status": "unknown",
+      "source": "No board probe output is available.",
+      "risk": "Logical and physical dimensions may not match the archived 800-pixel width.",
+      "verification_command": "cat /sys/class/graphics/fb0/virtual_size; fbset -fb /dev/fb0 -i"
+    },
+    "runtime_height": {
+      "name": "runtime_height",
+      "value": null,
+      "status": "unknown",
+      "source": "No board probe output is available.",
+      "risk": "Logical and physical dimensions may not match the archived 480-pixel height.",
+      "verification_command": "cat /sys/class/graphics/fb0/virtual_size; fbset -fb /dev/fb0 -i"
+    },
+    "runtime_bits_per_pixel": {
+      "name": "runtime_bits_per_pixel",
+      "value": null,
+      "status": "unknown",
+      "source": "No board probe output is available.",
+      "risk": "The archived 32-bit LVGL setting is unsafe to assume; 16bpp and 24bpp require deliberate handling.",
+      "verification_command": "cat /sys/class/graphics/fb0/bits_per_pixel"
+    },
+    "runtime_line_length": {
+      "name": "runtime_line_length",
+      "value": null,
+      "status": "unknown",
+      "source": "No board probe output is available.",
+      "risk": "Ignoring stride or using the wrong bytes-per-pixel can corrupt rows or memory.",
+      "verification_command": "cat /sys/class/graphics/fb0/stride; fbset -fb /dev/fb0 -i"
+    },
+    "runtime_pixel_format": {
+      "name": "runtime_pixel_format",
+      "value": null,
+      "status": "unknown",
+      "source": "No runtime red/green/blue/transparency offset data is available.",
+      "risk": "Even at 32bpp, RGB/BGR/alpha channel layouts can differ from LVGL's in-memory color layout.",
+      "verification_command": "fbset -fb /dev/fb0 -i"
+    },
+    "runtime_rotation": {
+      "name": "runtime_rotation",
+      "value": null,
+      "status": "unknown",
+      "source": "No physical screen orientation test is available.",
+      "risk": "Display and touch coordinates may be transposed or reversed.",
+      "verification_command": "manual: show an asymmetric four-corner test screen and record 0, 90, 180, or 270 degrees"
+    },
+    "runtime_xoffset": {
+      "name": "runtime_xoffset",
+      "value": null,
+      "status": "unknown",
+      "source": "No board probe output is available.",
+      "risk": "A nonzero framebuffer offset changes the flush address.",
+      "verification_command": "fbset -fb /dev/fb0 -i"
+    },
+    "runtime_yoffset": {
+      "name": "runtime_yoffset",
+      "value": null,
+      "status": "unknown",
+      "source": "No board probe output is available.",
+      "risk": "A nonzero framebuffer offset changes the flush address.",
+      "verification_command": "fbset -fb /dev/fb0 -i"
+    },
+    "runtime_smem_len": {
+      "name": "runtime_smem_len",
+      "value": null,
+      "status": "unknown",
+      "source": "No board ioctl report is available.",
+      "risk": "Mapping or flushing beyond framebuffer memory can crash or corrupt memory.",
+      "verification_command": "fbset -fb /dev/fb0 -i"
+    },
+    "runtime_fbioblank_supported": {
+      "name": "runtime_fbioblank_supported",
+      "value": null,
+      "status": "unknown",
+      "source": "The old driver calls FBIOBLANK, but no board test exists.",
+      "risk": "The old driver treats an unsupported blank ioctl as initialization failure.",
+      "verification_command": "manual: test an adapted driver that treats unsupported FBIOBLANK as nonfatal"
+    },
+    "runtime_full_screen_buffer_suitable": {
+      "name": "runtime_full_screen_buffer_suitable",
+      "value": null,
+      "status": "unknown",
+      "source": "No board memory/performance measurement is available.",
+      "risk": "A full-screen buffer can waste RAM or reduce responsiveness.",
+      "verification_command": "manual: compare partial-buffer and full-buffer RAM use and frame time on the board"
+    }
+  },
+  "input": {
+    "old_default_device": {
+      "name": "old_default_device",
+      "value": "/dev/input/event0",
+      "status": "confirmed-source",
+      "source": "reference/six/six/lv_drv_conf.h:450",
+      "risk": "Linux event numbering is not a stable hardware identity.",
+      "verification_command": "cat /proc/bus/input/devices"
+    },
+    "old_x_min": {
+      "name": "old_x_min",
+      "value": 0,
+      "status": "confirmed-source",
+      "source": "reference/six/six/lv_drv_conf.h:456",
+      "risk": "This is an archived calibration constant, not a measured board value.",
+      "verification_command": "manual: inspect EVIOCGABS or a short controlled input diagnostic"
+    },
+    "old_x_max": {
+      "name": "old_x_max",
+      "value": 1024,
+      "status": "confirmed-source",
+      "source": "reference/six/six/lv_drv_conf.h:457",
+      "risk": "This is an archived calibration constant, not a measured board value.",
+      "verification_command": "manual: inspect EVIOCGABS or a short controlled input diagnostic"
+    },
+    "old_y_min": {
+      "name": "old_y_min",
+      "value": 0,
+      "status": "confirmed-source",
+      "source": "reference/six/six/lv_drv_conf.h:458",
+      "risk": "This is an archived calibration constant, not a measured board value.",
+      "verification_command": "manual: inspect EVIOCGABS or a short controlled input diagnostic"
+    },
+    "old_y_max": {
+      "name": "old_y_max",
+      "value": 600,
+      "status": "confirmed-source",
+      "source": "reference/six/six/lv_drv_conf.h:459",
+      "risk": "This is an archived calibration constant, not a measured board value.",
+      "verification_command": "manual: inspect EVIOCGABS or a short controlled input diagnostic"
+    },
+    "old_swap_xy": {
+      "name": "old_swap_xy",
+      "value": false,
+      "status": "confirmed-source",
+      "source": "reference/six/six/lv_drv_conf.h:451",
+      "risk": "The archived orientation may not match the actual LCD mounting or chosen display rotation.",
+      "verification_command": "manual: touch all four corners after display orientation is fixed"
+    },
+    "old_invert_x": {
+      "name": "old_invert_x",
+      "value": false,
+      "status": "confirmed-source",
+      "source": "reference/six/six/lv_drv_conf.h and old evdev mapping contain no separate X inversion setting",
+      "risk": "Absence of an old macro is not proof that the current board needs no inversion.",
+      "verification_command": "manual: touch left and right edges"
+    },
+    "old_invert_y": {
+      "name": "old_invert_y",
+      "value": false,
+      "status": "confirmed-source",
+      "source": "reference/six/six/lv_drv_conf.h and old evdev mapping contain no separate Y inversion setting",
+      "risk": "Absence of an old macro is not proof that the current board needs no inversion.",
+      "verification_command": "manual: touch top and bottom edges"
+    },
+    "old_auto_detection": {
+      "name": "old_auto_detection",
+      "value": false,
+      "status": "confirmed-source",
+      "source": "reference/six/six/lv_drivers/indev/evdev.c and lv_drv_conf.h",
+      "risk": "Hard-coded event numbers can select the wrong device.",
+      "verification_command": "grep -n 'evdev_set_file\\|EVDEV_NAME' reference/six/six/lv_drivers/indev/evdev.c reference/six/six/lv_drv_conf.h"
+    },
+    "old_driver_event_support": {
+      "name": "old_driver_event_support",
+      "value": ["EV_REL:REL_X/REL_Y", "EV_ABS:ABS_X/ABS_Y", "EV_ABS:ABS_MT_POSITION_X/ABS_MT_POSITION_Y", "EV_ABS:ABS_MT_TRACKING_ID", "EV_KEY:BTN_MOUSE/BTN_TOUCH"],
+      "status": "confirmed-source",
+      "source": "reference/six/six/lv_drivers/indev/evdev.c:113-207",
+      "risk": "ABS_MT_SLOT is not handled and the driver provides only one LVGL pointer, not true multitouch.",
+      "verification_command": "grep -n 'EV_REL\\|EV_ABS\\|EV_KEY\\|ABS_MT' reference/six/six/lv_drivers/indev/evdev.c"
+    },
+    "runtime_device": {
+      "name": "runtime_device",
+      "value": null,
+      "status": "unknown",
+      "source": "No board input-device inventory is available.",
+      "risk": "The bootstrap must not silently use event0.",
+      "verification_command": "cat /proc/bus/input/devices"
+    },
+    "runtime_x_min": {
+      "name": "runtime_x_min",
+      "value": null,
+      "status": "unknown",
+      "source": "No board axis capability report is available.",
+      "risk": "Incorrect scaling causes unreachable edges or offset touch points.",
+      "verification_command": "manual: query EVIOCGABS for the selected device"
+    },
+    "runtime_x_max": {
+      "name": "runtime_x_max",
+      "value": null,
+      "status": "unknown",
+      "source": "No board axis capability report is available.",
+      "risk": "Incorrect scaling causes unreachable edges or offset touch points.",
+      "verification_command": "manual: query EVIOCGABS for the selected device"
+    },
+    "runtime_y_min": {
+      "name": "runtime_y_min",
+      "value": null,
+      "status": "unknown",
+      "source": "No board axis capability report is available.",
+      "risk": "Incorrect scaling causes unreachable edges or offset touch points.",
+      "verification_command": "manual: query EVIOCGABS for the selected device"
+    },
+    "runtime_y_max": {
+      "name": "runtime_y_max",
+      "value": null,
+      "status": "unknown",
+      "source": "No board axis capability report is available.",
+      "risk": "Incorrect scaling causes unreachable edges or offset touch points.",
+      "verification_command": "manual: query EVIOCGABS for the selected device"
+    },
+    "runtime_swap_xy": {
+      "name": "runtime_swap_xy",
+      "value": null,
+      "status": "unknown",
+      "source": "No four-corner touch test is available.",
+      "risk": "Touch coordinates may be transposed relative to the display.",
+      "verification_command": "manual: touch all four corners after display rotation is fixed"
+    },
+    "runtime_invert_x": {
+      "name": "runtime_invert_x",
+      "value": null,
+      "status": "unknown",
+      "source": "No four-corner touch test is available.",
+      "risk": "Left and right may be reversed.",
+      "verification_command": "manual: touch left and right edges"
+    },
+    "runtime_invert_y": {
+      "name": "runtime_invert_y",
+      "value": null,
+      "status": "unknown",
+      "source": "No four-corner touch test is available.",
+      "risk": "Top and bottom may be reversed.",
+      "verification_command": "manual: touch top and bottom edges"
+    },
+    "runtime_event_protocol": {
+      "name": "runtime_event_protocol",
+      "value": null,
+      "status": "unknown",
+      "source": "No selected input device capability report is available.",
+      "risk": "ABS_X/Y, multitouch protocol A, and multitouch protocol B require different state handling.",
+      "verification_command": "manual: inspect device capabilities for ABS_X/Y, ABS_MT_POSITION_X/Y, ABS_MT_SLOT, BTN_TOUCH, and tracking IDs"
+    },
+    "runtime_btn_touch": {
+      "name": "runtime_btn_touch",
+      "value": null,
+      "status": "unknown",
+      "source": "No event capability report is available.",
+      "risk": "A device without BTN_TOUCH may rely entirely on tracking-ID semantics.",
+      "verification_command": "manual: inspect the selected input device capabilities"
+    },
+    "runtime_tracking_id_semantics": {
+      "name": "runtime_tracking_id_semantics",
+      "value": null,
+      "status": "unknown",
+      "source": "No controlled event sample is available.",
+      "risk": "The old driver incorrectly treats only tracking ID 0 as press; Linux permits any nonnegative ID and uses -1 for release.",
+      "verification_command": "manual: capture a short, bounded controlled touch diagnostic after explicit operator approval"
+    },
+    "runtime_four_corner_calibration": {
+      "name": "runtime_four_corner_calibration",
+      "value": null,
+      "status": "unknown",
+      "source": "No physical board test is available.",
+      "risk": "Numeric ranges alone do not prove orientation and edge accuracy.",
+      "verification_command": "manual: verify center and all four corners on the final display orientation"
+    }
+  },
+  "lvgl": {
+    "archived_version": {
+      "name": "archived_version",
+      "value": "8.3.0",
+      "status": "confirmed-source",
+      "source": "reference/six/six/lvgl/lvgl.h:16-18",
+      "risk": "The copied lv_conf.h comment says 8.2.0 and must not be used as the actual version indicator.",
+      "verification_command": "grep -n 'LVGL_VERSION_' reference/six/six/lvgl/lvgl.h"
+    },
+    "archived_api_generation": {
+      "name": "archived_api_generation",
+      "value": 8,
+      "status": "confirmed-source",
+      "source": "reference/six/six/src/core/main.c uses lv_disp_draw_buf_t, lv_disp_drv_t, and registration APIs from LVGL 8",
+      "risk": "LVGL 9 API types and initialization cannot be mixed into an LVGL 8 port.",
+      "verification_command": "grep -n 'lv_disp_draw_buf_t\\|lv_disp_drv_t\\|lv_indev_drv_t' reference/six/six/src/core/main.c"
+    },
+    "archived_config_comment_version": {
+      "name": "archived_config_comment_version",
+      "value": "8.2.0",
+      "status": "confirmed-source",
+      "source": "reference/six/six/lv_conf.h:3 and lv_drv_conf.h:3",
+      "risk": "This stale comment conflicts with the actual 8.3.0 source and can mislead maintainers.",
+      "verification_command": "head -n 5 reference/six/six/lv_conf.h; head -n 5 reference/six/six/lv_drv_conf.h"
+    },
+    "recommended_version": {
+      "name": "recommended_version",
+      "value": "8.3.0",
+      "status": "inferred",
+      "source": "Chosen to preserve the confirmed archived API generation while creating a clean project.",
+      "risk": "A later version upgrade must be a separate deliberate migration with its own validation.",
+      "verification_command": "manual: pin and record the exact LVGL 8.3.0 source revision used by the new project"
+    },
+    "allow_lvgl9_api": {
+      "name": "allow_lvgl9_api",
+      "value": false,
+      "status": "inferred",
+      "source": "Compatibility policy derived from the archived LVGL 8.3.0 API baseline.",
+      "risk": "Mixing APIs produces build failures and subtle driver-lifecycle errors.",
+      "verification_command": "manual: code review new platform and UI code for LVGL 8 APIs only"
+    },
+    "old_tick_source": {
+      "name": "old_tick_source",
+      "value": "custom_tick_get using gettimeofday",
+      "status": "confirmed-source",
+      "source": "reference/six/six/lv_conf.h:94-98 and src/core/main.c:139-195",
+      "risk": "Wall-clock adjustments can jump backward/forward, and 32-bit intermediate arithmetic may overflow.",
+      "verification_command": "grep -n 'LV_TICK_CUSTOM\\|custom_tick_get\\|gettimeofday' reference/six/six/lv_conf.h reference/six/six/src/core/main.c"
+    },
+    "recommended_tick_source": {
+      "name": "recommended_tick_source",
+      "value": "clock_gettime(CLOCK_MONOTONIC)",
+      "status": "inferred",
+      "source": "Recommended replacement for the archived wall-clock implementation.",
+      "risk": "The target libc and linker requirements still need confirmation with the selected toolchain.",
+      "verification_command": "manual: compile-only with the selected compiler, then verify monotonic behavior on board"
+    },
+    "reusable_settings": {
+      "name": "reusable_settings",
+      "value": ["LVGL 8 configuration structure", "FreeType feature hook", "custom tick hook concept", "fbdev and evdev driver selection concept"],
+      "status": "inferred",
+      "source": "Derived from the archived configuration and initialization chain.",
+      "risk": "Concrete color depth, paths, calibration values, tick code, and memory sizes are not directly reusable.",
+      "verification_command": "manual: review each adopted setting against confirmed-runtime profile values"
+    },
+    "settings_requiring_runtime_confirmation": {
+      "name": "settings_requiring_runtime_confirmation",
+      "value": ["LV_COLOR_DEPTH", "horizontal and vertical resolution", "draw-buffer size/count", "framebuffer path and format", "input path/ranges/orientation", "filesystem/font path", "memory limits"],
+      "status": "inferred",
+      "source": "Display, input, font, and deployment audit findings.",
+      "risk": "Using source defaults as runtime facts can corrupt display output or make touch unusable.",
+      "verification_command": "sh scripts/validate_profile.sh"
+    },
+    "recommended_minimal_modules": {
+      "name": "recommended_minimal_modules",
+      "value": ["LVGL core", "required widgets only", "fbdev adapter after hardening", "evdev adapter after hardening", "FreeType only when a licensed CJK font is selected"],
+      "status": "inferred",
+      "source": "Minimal portability recommendation from the archived project audit.",
+      "risk": "Actual module selection must follow the first new project's UI requirements and memory measurements.",
+      "verification_command": "manual: review the new lv_conf.h and binary size report"
+    },
+    "excluded_content": {
+      "name": "excluded_content",
+      "value": ["LVGL demos", "LVGL examples", "archived login UI", "product UI", "administrator product UI", "payment UI", "old build objects and binaries"],
+      "status": "inferred",
+      "source": "Platform-kit scope and old-project reuse classification.",
+      "risk": "Including old application content reintroduces unrelated business logic and binary contamination.",
+      "verification_command": "find . -type f"
+    }
+  },
+  "fonts": {
+    "old_freetype_enabled": {
+      "name": "old_freetype_enabled",
+      "value": true,
+      "status": "confirmed-source",
+      "source": "reference/six/six/lv_conf.h:646",
+      "risk": "Feature enablement does not prove that the retained target libraries match the future toolchain.",
+      "verification_command": "grep -n 'LV_USE_FREETYPE' reference/six/six/lv_conf.h"
+    },
+    "old_freetype_header_version": {
+      "name": "old_freetype_header_version",
+      "value": "2.12.1",
+      "status": "confirmed-source",
+      "source": "reference/six/six/freetypelib/include/freetype2/freetype/freetype.h:4943-4945",
+      "risk": "Headers alone do not prove the linked binary version or target compatibility.",
+      "verification_command": "grep -n 'FREETYPE_.*MAJOR\\|FREETYPE_.*MINOR\\|FREETYPE_.*PATCH' reference/six/six/freetypelib/include/freetype2/freetype/freetype.h"
+    },
+    "old_font_path": {
+      "name": "old_font_path",
+      "value": "/font/simkai.ttf",
+      "status": "confirmed-source",
+      "source": "reference/six/six/src/common/ui_font.c:21 and src/login/ui_login.c:25",
+      "risk": "The absolute path is an archived deployment assumption and the file's license is unknown.",
+      "verification_command": "grep -R -n '/font/simkai.ttf' reference/six/six/src"
+    },
+    "old_font_license": {
+      "name": "old_font_license",
+      "value": null,
+      "status": "unknown",
+      "source": "No authoritative font license was identified in the archived project.",
+      "risk": "Redistribution may violate copyright or license terms.",
+      "verification_command": "manual: obtain authoritative provenance and license; otherwise discard the font"
+    },
+    "copy_old_font_into_kit": {
+      "name": "copy_old_font_into_kit",
+      "value": false,
+      "status": "inferred",
+      "source": "Platform-kit scope and unresolved old-font license.",
+      "risk": "Copying the file would create a licensing and provenance problem.",
+      "verification_command": "find . -type f -iname '*.ttf' -o -iname '*.otf'"
+    },
+    "new_cjk_font_path": {
+      "name": "new_cjk_font_path",
+      "value": null,
+      "status": "unknown",
+      "source": "A licensed replacement font has not been selected.",
+      "risk": "Chinese text cannot be treated as deployable until a font and its license are recorded.",
+      "verification_command": "manual: select a licensed CJK font and record its project-relative or deployment path"
+    },
+    "new_cjk_font_path_configurable": {
+      "name": "new_cjk_font_path_configurable",
+      "value": true,
+      "status": "inferred",
+      "source": "Portability requirement derived from the archived absolute-path problem.",
+      "risk": "A new project that hard-codes /font recreates the same deployment coupling.",
+      "verification_command": "manual: inspect the new platform_config.h and deployment configuration"
+    },
+    "freetype_build_policy": {
+      "name": "freetype_build_policy",
+      "value": "rebuild with the final confirmed compiler and sysroot, or use a matching sysroot-provided target library",
+      "status": "inferred",
+      "source": "Archived static/shared libraries came from different compiler and CPU baselines; current sysroot compatibility is unknown.",
+      "risk": "Reusing archived binaries can mix libc, compiler runtime, CPU, and float ABI assumptions.",
+      "verification_command": "manual: record the selected compiler, sysroot, FreeType configuration, and target ELF metadata"
+    },
+    "old_freetype_binary_compatibility": {
+      "name": "old_freetype_binary_compatibility",
+      "value": null,
+      "status": "unknown",
+      "source": "No current toolchain/sysroot was successfully probed or linked, and linking old artifacts is outside this kit task.",
+      "risk": "ARM ELF class and a soft-float marker are insufficient compatibility proof.",
+      "verification_command": "Do not reuse the old binary; rebuild FreeType with the selected toolchain instead."
+    }
+  },
+  "networking": {
+    "ui_callbacks_may_block_socket": {
+      "name": "ui_callbacks_may_block_socket",
+      "value": false,
+      "status": "confirmed-source",
+      "source": ".scratch/智慧医疗终端/PRD.md:31,88,120",
+      "risk": "Blocking socket calls in the LVGL thread freeze rendering and touch handling.",
+      "verification_command": "manual: code review LVGL callbacks and verify UI remains responsive during network delay"
+    },
+    "network_worker_thread": {
+      "name": "network_worker_thread",
+      "value": true,
+      "status": "confirmed-source",
+      "source": ".scratch/智慧医疗终端/PRD.md:31,88,104",
+      "risk": "Thread lifecycle, timeouts, cancellation, and reconnect behavior still belong to each application.",
+      "verification_command": "manual: inspect the new terminal adapter architecture"
+    },
+    "request_result_queues": {
+      "name": "request_result_queues",
+      "value": true,
+      "status": "confirmed-source",
+      "source": ".scratch/智慧医疗终端/PRD.md:88,104",
+      "risk": "Queues must be bounded and synchronized; LVGL objects must only be mutated by the UI thread.",
+      "verification_command": "manual: inspect queue bounds, mutex/condition usage, and UI-thread result consumption"
+    },
+    "protocol_encoding": {
+      "name": "protocol_encoding",
+      "value": "UTF-8",
+      "status": "confirmed-source",
+      "source": "current project protocol contract and platform-kit task specification",
+      "risk": "Locale-dependent encodings break JSON interoperability and Chinese text handling.",
+      "verification_command": "manual: inspect serialized bytes and decode as UTF-8"
+    },
+    "protocol_framing": {
+      "name": "protocol_framing",
+      "value": "one JSON object per line",
+      "status": "confirmed-source",
+      "source": ".scratch/智慧医疗终端/PRD.md:93-97 and current frame implementation",
+      "risk": "TCP does not preserve write boundaries; receive logic must handle partial and combined frames.",
+      "verification_command": "make -B test"
+    },
+    "frame_terminator": {
+      "name": "frame_terminator",
+      "value": "\n",
+      "status": "confirmed-source",
+      "source": "current protocol implementation and regression tests",
+      "risk": "The two-character sequence backslash-n is not a valid substitute for an actual newline byte.",
+      "verification_command": "make -B test"
+    },
+    "max_message_bytes": {
+      "name": "max_message_bytes",
+      "value": 4096,
+      "status": "confirmed-source",
+      "source": "include/clinic_protocol.h:7",
+      "risk": "New generic adapters must preserve the bound or deliberately version the protocol.",
+      "verification_command": "grep -n 'CLINIC_MAX_FRAME_SIZE' include/clinic_protocol.h"
+    },
+    "per_connection_receive_buffer_bytes": {
+      "name": "per_connection_receive_buffer_bytes",
+      "value": 8192,
+      "status": "confirmed-source",
+      "source": "include/clinic_protocol.h:8",
+      "risk": "Overflow handling and connection recovery must remain explicit.",
+      "verification_command": "grep -n 'CLINIC_RECV_BUFFER_SIZE' include/clinic_protocol.h"
+    },
+    "complete_send_required": {
+      "name": "complete_send_required",
+      "value": true,
+      "status": "confirmed-source",
+      "source": "include/clinic_net.h and common/clinic_net.c clinic_net_send_all",
+      "risk": "A single send call can transmit fewer bytes than requested.",
+      "verification_command": "grep -n 'clinic_net_send_all' include/clinic_net.h common/clinic_net.c"
+    },
+    "framed_receive_required": {
+      "name": "framed_receive_required",
+      "value": true,
+      "status": "confirmed-source",
+      "source": "common/clinic_frame.c, server/main.c, and TCP regression tests",
+      "risk": "Assuming one recv equals one JSON message fails on partial or combined TCP delivery.",
+      "verification_command": "make -B test"
+    },
+    "template_contains_medical_business_api": {
+      "name": "template_contains_medical_business_api",
+      "value": false,
+      "status": "inferred",
+      "source": "Cross-project platform-kit scope.",
+      "risk": "Hard-coding clinic actions would make the platform template unsuitable for other GEC6818 projects.",
+      "verification_command": "grep -R -n 'clinic_core\\|department\\|doctor\\|queue' templates scripts config || true"
+    }
+  },
+  "deployment": {
+    "runtime_user": {
+      "name": "runtime_user",
+      "value": null,
+      "status": "unknown",
+      "source": "No board runtime identity is available.",
+      "risk": "Running as root by default would hide device-permission and security problems.",
+      "verification_command": "id"
+    },
+    "application_directory": {
+      "name": "application_directory",
+      "value": null,
+      "status": "unknown",
+      "source": "No new-project deployment layout has been chosen.",
+      "risk": "The archived /root/ticket_terminal path is application-specific and must not be reused silently.",
+      "verification_command": "manual: choose and document a project-owned deployment directory"
+    },
+    "writable_data_directory": {
+      "name": "writable_data_directory",
+      "value": null,
+      "status": "unknown",
+      "source": "Board mounts and persistence are not known.",
+      "risk": "Writing credentials or application state to filesystem root is unsafe and may be nonpersistent.",
+      "verification_command": "mount; df -h"
+    },
+    "font_directory": {
+      "name": "font_directory",
+      "value": null,
+      "status": "unknown",
+      "source": "A licensed replacement font and deployment path have not been selected.",
+      "risk": "The archived /font path is a global absolute path and should not be assumed.",
+      "verification_command": "manual: choose a configurable project-owned font path"
+    },
+    "startup_mechanism": {
+      "name": "startup_mechanism",
+      "value": null,
+      "status": "unknown",
+      "source": "The running board init system is unknown.",
+      "risk": "The old run.sh is not a portable service definition.",
+      "verification_command": "cat /proc/1/comm; cat /etc/os-release"
+    },
+    "old_install_target": {
+      "name": "old_install_target",
+      "value": "/root/ticket_terminal",
+      "status": "confirmed-source",
+      "source": "reference/six/six/release/ticket_terminal_release/install.sh:3",
+      "risk": "The old script overwrites absolute paths and assumes root; it must not be executed or copied into new projects.",
+      "verification_command": "sed -n '1,80p' reference/six/six/release/ticket_terminal_release/install.sh"
+    },
+    "old_root_level_data_files": {
+      "name": "old_root_level_data_files",
+      "value": ["/user.txt", "/save_pwd.txt", "/font/simkai.ttf"],
+      "status": "confirmed-source",
+      "source": "reference/six/six/release/ticket_terminal_release/install.sh",
+      "risk": "These paths contain old plaintext account state or an unlicensed font and are prohibited reuse inputs.",
+      "verification_command": "grep -n '/user.txt\\|/save_pwd.txt\\|/font' reference/six/six/release/ticket_terminal_release/install.sh"
+    },
+    "copy_old_business_assets": {
+      "name": "copy_old_business_assets",
+      "value": false,
+      "status": "inferred",
+      "source": "Platform-kit scope and old-project reuse classification.",
+      "risk": "Old login, product, payment, admin, image, object, library, binary, and font content is unrelated or unsafe.",
+      "verification_command": "find . -type f"
+    },
+    "bootstrap_side_effect_policy": {
+      "name": "bootstrap_side_effect_policy",
+      "value": "create files only in the explicitly supplied new-project directory; no downloads, builds, installs, board connections, or device access",
+      "status": "inferred",
+      "source": "Platform-kit task specification.",
+      "risk": "Expanding bootstrap behavior would turn a reproducible scaffold into an uncontrolled deployment script.",
+      "verification_command": "sed -n '1,260p' scripts/bootstrap_gec6818_lvgl8_project.sh"
+    }
+  },
+  "known_risks": [
+    {
+      "name": "fbdev_24bpp_copy",
+      "value": "Archived fbdev treats 24bpp like 32bpp and copies four bytes per pixel.",
+      "status": "confirmed-source",
+      "source": "reference/six/six/lv_drivers/display/fbdev.c:198-205",
+      "risk": "Packed 24bpp can be misaddressed and overrun rows or mapped memory.",
+      "verification_command": "grep -n '24\\|32\\|line_length' reference/six/six/lv_drivers/display/fbdev.c"
+    },
+    {
+      "name": "fbdev_channel_layout",
+      "value": "Archived fbdev copies LVGL color bytes without validating channel offsets.",
+      "status": "confirmed-source",
+      "source": "reference/six/six/lv_drivers/display/fbdev.c and lvgl/src/misc/lv_color.h",
+      "risk": "RGB/BGR/alpha mismatch can produce swapped colors even when bpp is 32.",
+      "verification_command": "fbset -fb /dev/fb0 -i"
+    },
+    {
+      "name": "fbdev_map_failed_check",
+      "value": "Archived flush checks NULL rather than reliably tracking MAP_FAILED.",
+      "status": "confirmed-source",
+      "source": "reference/six/six/lv_drivers/display/fbdev.c:151,177",
+      "risk": "A failed mapping can be dereferenced and crash the process.",
+      "verification_command": "grep -n 'mmap\\|MAP_FAILED\\|fbp == NULL' reference/six/six/lv_drivers/display/fbdev.c"
+    },
+    {
+      "name": "fbdev_missing_munmap",
+      "value": "Archived fbdev exit closes the descriptor but does not call munmap.",
+      "status": "confirmed-source",
+      "source": "reference/six/six/lv_drivers/display/fbdev.c:164-167",
+      "risk": "Resource cleanup and restart behavior are incomplete.",
+      "verification_command": "grep -n 'fbdev_exit\\|munmap' reference/six/six/lv_drivers/display/fbdev.c"
+    },
+    {
+      "name": "fbdev_initialization_status",
+      "value": "Archived fbdev_init returns void and leaves the caller unable to distinguish failure.",
+      "status": "confirmed-source",
+      "source": "reference/six/six/lv_drivers/display/fbdev.c and src/core/main.c",
+      "risk": "LVGL may register and use a display driver after initialization failed.",
+      "verification_command": "grep -n 'fbdev_init' reference/six/six/lv_drivers/display/fbdev.c reference/six/six/src/core/main.c"
+    },
+    {
+      "name": "evdev_tracking_id",
+      "value": "Archived evdev treats only tracking ID 0 as press.",
+      "status": "confirmed-source",
+      "source": "reference/six/six/lv_drivers/indev/evdev.c:151-155",
+      "risk": "Any nonzero valid tracking ID may be interpreted incorrectly; Linux uses any nonnegative ID for contact and -1 for release.",
+      "verification_command": "sed -n '145,160p' reference/six/six/lv_drivers/indev/evdev.c"
+    },
+    {
+      "name": "old_tick_wall_clock",
+      "value": "Archived custom tick uses gettimeofday.",
+      "status": "confirmed-source",
+      "source": "reference/six/six/src/core/main.c:139-195",
+      "risk": "Clock adjustments and 32-bit intermediate arithmetic can break LVGL timing.",
+      "verification_command": "grep -n 'gettimeofday\\|custom_tick_get' reference/six/six/src/core/main.c"
+    },
+    {
+      "name": "old_freetype_architecture_mix",
+      "value": "Archived static and shared FreeType artifacts came from different compiler/CPU baselines.",
+      "status": "confirmed-source",
+      "source": "Prior read-only ELF metadata audit of reference/six/six/freetypelib/lib",
+      "risk": "Artifact architecture alone cannot prove compatibility with either current compiler candidate or sysroot.",
+      "verification_command": "readelf -h -A -d reference/six/six/freetypelib/lib/libfreetype.so.6.18.3"
+    },
+    {
+      "name": "old_build_files",
+      "value": "Archived Makefile and CMakeLists.txt are not equivalent and are not safe new-project build inputs.",
+      "status": "confirmed-source",
+      "source": "reference/six/six/Makefile and CMakeLists.txt",
+      "risk": "Short compiler names, absent sysroot selection, static linking, host pkg-config, and old business source lists can contaminate a build.",
+      "verification_command": "sed -n '1,180p' reference/six/six/Makefile; sed -n '1,120p' reference/six/six/CMakeLists.txt"
+    },
+    {
+      "name": "old_deployment_scripts",
+      "value": "Archived install/run scripts use root-owned absolute paths and old plaintext account files.",
+      "status": "confirmed-source",
+      "source": "reference/six/six/release/ticket_terminal_release/install.sh and run.sh",
+      "risk": "Executing them can overwrite system paths, deploy unrelated business data, and expose credentials.",
+      "verification_command": "sed -n '1,120p' reference/six/six/release/ticket_terminal_release/install.sh"
+    }
+  ],
+  "unresolved_items": [
+    {
+      "name": "board_runtime_identity",
+      "value": null,
+      "status": "unknown",
+      "source": "No successful board probe.",
+      "risk": "CPU, OS, libc, account, mount, and device-node facts remain unavailable.",
+      "verification_command": "sh scripts/probe_gec6818_board.sh --output gec6818_runtime_report.txt"
+    },
+    {
+      "name": "toolchain_selection",
+      "value": null,
+      "status": "unknown",
+      "source": "No candidate compiler probe completed.",
+      "risk": "No compiler, architecture, ABI, float ABI, or sysroot is approved for bootstrap defaults.",
+      "verification_command": "sh scripts/probe_toolchain.sh"
+    },
+    {
+      "name": "framebuffer_runtime_format",
+      "value": null,
+      "status": "unknown",
+      "source": "No board framebuffer report.",
+      "risk": "bpp, channel layout, stride, offsets, memory length, blank support, and rotation remain unresolved.",
+      "verification_command": "sh scripts/probe_gec6818_board.sh --output gec6818_runtime_report.txt"
+    },
+    {
+      "name": "touch_runtime_calibration",
+      "value": null,
+      "status": "unknown",
+      "source": "No selected device capability report or physical test.",
+      "risk": "Device node, protocol, ranges, swap, inversion, and corner accuracy remain unresolved.",
+      "verification_command": "manual: select the device from /proc/bus/input/devices, inspect capabilities, then run a bounded four-corner test"
+    },
+    {
+      "name": "licensed_cjk_font",
+      "value": null,
+      "status": "unknown",
+      "source": "No replacement font has been chosen.",
+      "risk": "The archived simkai.ttf license is unknown and it is excluded from this kit.",
+      "verification_command": "manual: choose a licensed CJK font and record provenance, license, checksum, and configurable path"
+    },
+    {
+      "name": "deployment_layout",
+      "value": null,
+      "status": "unknown",
+      "source": "No board mount/runtime-user probe and no new application deployment decision.",
+      "risk": "Permissions, persistence, startup, logs, application data, and font placement remain undefined.",
+      "verification_command": "id; mount; df -h; cat /proc/1/comm"
+    }
+  ],
+  "evidence_sources": [
+    {
+      "name": "old_application_entry",
+      "value": "reference/six/six/src/core/main.c",
+      "status": "confirmed-source",
+      "source": "Read-only source inspection.",
+      "risk": "Initialization ideas are evidence only; old UI entry, tick code, and hard-coded dimensions are not a clean template.",
+      "verification_command": "sed -n '1,220p' reference/six/six/src/core/main.c"
+    },
+    {
+      "name": "old_lvgl_config",
+      "value": "reference/six/six/lv_conf.h",
+      "status": "confirmed-source",
+      "source": "Read-only source inspection.",
+      "risk": "The file contains old application choices and a stale 8.2.0 comment.",
+      "verification_command": "sed -n '1,760p' reference/six/six/lv_conf.h"
+    },
+    {
+      "name": "old_driver_config",
+      "value": "reference/six/six/lv_drv_conf.h",
+      "status": "confirmed-source",
+      "source": "Read-only source inspection.",
+      "risk": "Device nodes and calibration values are source defaults, not runtime facts.",
+      "verification_command": "sed -n '310,470p' reference/six/six/lv_drv_conf.h"
+    },
+    {
+      "name": "old_lvgl_version_header",
+      "value": "reference/six/six/lvgl/lvgl.h",
+      "status": "confirmed-source",
+      "source": "Read-only source inspection.",
+      "risk": "Only establishes the archived LVGL source version.",
+      "verification_command": "sed -n '1,30p' reference/six/six/lvgl/lvgl.h"
+    },
+    {
+      "name": "old_fbdev_driver",
+      "value": "reference/six/six/lv_drivers/display/fbdev.c",
+      "status": "confirmed-source",
+      "source": "Read-only source inspection.",
+      "risk": "Known 24bpp, pixel-layout, error-handling, and cleanup issues require adaptation.",
+      "verification_command": "sed -n '80,280p' reference/six/six/lv_drivers/display/fbdev.c"
+    },
+    {
+      "name": "old_evdev_driver",
+      "value": "reference/six/six/lv_drivers/indev/evdev.c",
+      "status": "confirmed-source",
+      "source": "Read-only source inspection.",
+      "risk": "Known fixed-node, fixed-range, tracking-ID, and protocol limitations require adaptation.",
+      "verification_command": "sed -n '50,270p' reference/six/six/lv_drivers/indev/evdev.c"
+    },
+    {
+      "name": "old_font_helper",
+      "value": "reference/six/six/src/common/ui_font.c",
+      "status": "confirmed-source",
+      "source": "Read-only source inspection.",
+      "risk": "The loading concept is reusable only after replacing the absolute path and unlicensed font.",
+      "verification_command": "sed -n '1,130p' reference/six/six/src/common/ui_font.c"
+    },
+    {
+      "name": "old_makefile",
+      "value": "reference/six/six/Makefile",
+      "status": "confirmed-source",
+      "source": "Read-only source inspection.",
+      "risk": "It is evidence of old flags and source lists, not a reusable build file.",
+      "verification_command": "sed -n '1,180p' reference/six/six/Makefile"
+    },
+    {
+      "name": "old_cmake",
+      "value": "reference/six/six/CMakeLists.txt",
+      "status": "confirmed-source",
+      "source": "Read-only source inspection.",
+      "risk": "It is not equivalent to the old Makefile and lacks a confirmed cross-toolchain configuration.",
+      "verification_command": "sed -n '1,120p' reference/six/six/CMakeLists.txt"
+    },
+    {
+      "name": "current_project_prd",
+      "value": ".scratch/智慧医疗终端/PRD.md",
+      "status": "confirmed-source",
+      "source": "Read-only current-project background permitted by the task.",
+      "risk": "Only generic platform/networking principles belong in this kit; medical business APIs do not.",
+      "verification_command": "sed -n '80,125p' .scratch/智慧医疗终端/PRD.md"
+    },
+    {
+      "name": "current_protocol_limits",
+      "value": "include/clinic_protocol.h",
+      "status": "confirmed-source",
+      "source": "Read-only current-project header inspection.",
+      "risk": "Limits are reusable architectural constraints, not permission to copy medical protocol actions.",
+      "verification_command": "sed -n '1,30p' include/clinic_protocol.h"
+    },
+    {
+      "name": "current_network_send_helper",
+      "value": "common/clinic_net.c and include/clinic_net.h",
+      "status": "confirmed-source",
+      "source": "Read-only current-project network abstraction inspection.",
+      "risk": "Reuse complete-send and framing principles without hard-coding medical endpoints into the generic template.",
+      "verification_command": "grep -n 'clinic_net_send_all' common/clinic_net.c include/clinic_net.h"
+    },
+    {
+      "name": "current_root_makefile",
+      "value": "Makefile",
+      "status": "confirmed-source",
+      "source": "Read-only current-project build definition inspection; TEST_TARGETS contains 13 host regression programs.",
+      "risk": "Target definitions do not by themselves prove a current successful run; the runtime result remains separately sourced from the user's verified project state.",
+      "verification_command": "make -B test"
+    },
+    {
+      "name": "reference_project_host_regression_suite",
+      "value": {"scope": "host-backend", "command": "make -B test", "result": "13 tests passed", "platform_parameter": false},
+      "status": "confirmed-runtime",
+      "scope": "host-backend",
+      "source": "User-supplied verified current medical backend state before the platform-kit task.",
+      "risk": "This is non-platform reference evidence. It must never satisfy a GEC6818 board or toolchain gate and must not be copied into a generic platform template.",
+      "verification_command": "make -B test"
+    },
+    {
+      "name": "vmware_toolchain_probe_20260713T103421Z",
+      "value": {"scope": "toolchain", "path": "evidence/toolchain_probe_vmware_20260713T103421Z.log", "sha256": "2ce950737fccb37f8c299eb1ae5d789c1813117eee0e307aebe07a9e9524b03a", "size_bytes": 5406002, "generated_at_utc": "2026-07-13T10:34:39Z", "probe_exit": 0, "host": "VMware Ubuntu Linux 5.4.0-216-generic x86_64"},
+      "status": "confirmed-runtime",
+      "scope": "toolchain",
+      "source": "Raw output produced by scripts/probe_toolchain.sh in /mnt/hgfs/codex on VMware Ubuntu.",
+      "risk": "The raw report is large because readelf expanded every libgcc archive member; its compile-only successes do not prove linking, board execution, or FreeType compatibility.",
+      "verification_command": "sha256sum evidence/toolchain_probe_vmware_20260713T103421Z.log"
+    }
+  ]
+}

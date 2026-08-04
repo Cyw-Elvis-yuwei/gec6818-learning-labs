@@ -1,0 +1,8 @@
+黄山风景区|190.00|500|img_product_01
+西湖景区|0.00|1000|img_product_02
+长城景区|40.00|600|img_product_03
+桂林山水|125.00|320|img_product_04
+张家界|228.00|280|img_product_05
+鼓浪屿|90.00|450|img_product_06
+九寨沟|169.00|360|img_product_07
+兵马俑|120.00|520|img_product_08
