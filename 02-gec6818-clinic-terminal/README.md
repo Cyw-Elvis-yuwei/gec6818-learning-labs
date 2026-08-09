@@ -94,6 +94,12 @@ export LD_LIBRARY_PATH=/IOT:/lib:/usr/lib
 ./clinic_terminal
 ```
 
+## 设备演示录像
+
+- [医路通 GEC6818 设备演示（2026-07-21）](evidence/clinic-terminal-device-demo-2026-07-21.mp4)
+
+该录像是历史设备演示证据，展示开发板上的医路通终端界面与业务操作过程；它不等同于本次归档会话重新执行的完整验收。
+
 ## 当前整理边界
 
 本轮只整理辅助目录和工程入口说明，没有移动 `common`、`core`、`store`、`server`、`terminal` 或正式板端源码，也没有修改协议、数据库结构和业务语义。`reference` 中的实际 LVGL 运行依赖将在后续确认后再单独提取。
