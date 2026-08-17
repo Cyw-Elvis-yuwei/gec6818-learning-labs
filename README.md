@@ -8,6 +8,7 @@
 | --- | --- | --- | --- |
 | 01 | [LVGL 景区门票自助售票终端](01-lvgl-ticket-terminal/) | 嵌入式 Linux、LVGL、framebuffer、evdev、FreeType | 源码与静态资料已归档；当前版本构建和真机验证待补充 |
 | 02 | [医路通 GEC6818 联网智慧医疗自助终端](02-gec6818-clinic-terminal/) | 嵌入式 Linux、LVGL、TCP/JSON、epoll、SQLite | 保留历史构建、测试和用户实机确认；部分原始日志不完整 |
+| 03 | [ESP32 按键中断状态机](03-esp32-button-interrupt-state-machine/) | ESP32-S3 / GPIO Interrupt / FreeRTOS Queue / Task / Button State Machine | 用户实测通过：build、烧录、单击、双击、长按、LED 反馈 |
 
 ## 证据口径
 
@@ -23,4 +24,4 @@
 - 未确认许可的字体和第三方素材不进入合集。
 - 必需的第三方源码或库只保留实际构建需要的最小集合，并保留其许可证文件。
 
-最后整理：2026-08-04。
+最后整理：2026-08-17。
