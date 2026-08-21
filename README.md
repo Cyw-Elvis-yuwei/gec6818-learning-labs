@@ -11,6 +11,7 @@
 | 03 | [ESP32 按键中断状态机](03-esp32-button-interrupt-state-machine/) | ESP32-S3 / GPIO Interrupt / FreeRTOS Queue / Task / Button State Machine | 用户实测通过：build、烧录、单击、双击、长按、LED 反馈 |
 | 04 | [ESP32-S3 PCA9557 I2C IO 扩展](04-esp32-pca9557-i2c-io-expander/) | ESP32-S3 / 新版 I2C Master API / PCA9557 / GPIO 扩展 / 输入输出回环验证 | 用户实测通过：build、烧录、PCA9557 初始化、测试 A（IO5/IO6 回环）、测试 B（IO7 回环） |
 | 05 | [ESP32-S3 QMI8658 新版 I2C 迁移](05-esp32-qmi8658-new-i2c/) | ESP32-S3 / 新版 I2C Master API / 多设备共享 I2C bus / QMI8658 姿态检测 | 用户实测通过：build、烧录、QMI8658 初始化、XYZ 倾角持续读取与姿态变化 |
+| 06 | [ESP32-S3 ST7796 + FT6336 滑动看图](06-esp32s3-st7796-ft6336-swipe-gallery/) | ESP32-S3 / ST7796 SPI LCD / FT6336 I2C 触摸 / 滑动手势 / 内置演示图 | 用户实测通过：build、115200 完整烧录、屏幕显示、左右滑动识别与循环切图 |
 
 ## 证据口径
 
@@ -26,4 +27,4 @@
 - 未确认许可的字体和第三方素材不进入合集。
 - 必需的第三方源码或库只保留实际构建需要的最小集合，并保留其许可证文件。
 
-最后整理：2026-08-18。
+最后整理：2026-08-21。
