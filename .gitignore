@@ -30,4 +30,4 @@ release/
 
 # Required historical ARM FreeType libraries; license texts are stored beside them.
 !01-lvgl-ticket-terminal/freetypelib/lib/libfreetype.a
-!02-gec6818-clinic-terminal/reference/six/six/freetypelib/lib/libfreetype.*
+!02-s5p6818-clinic-terminal/reference/six/six/freetypelib/lib/libfreetype.*

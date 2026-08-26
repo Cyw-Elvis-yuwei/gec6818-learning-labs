@@ -1,13 +1,13 @@
-# GEC6818 嵌入式 Linux 学习合集
+# S5P6818 嵌入式 Linux 学习合集
 
-这里集中保存面向 GEC6818 开发板的嵌入式 Linux、LVGL 和联网终端项目。每个项目使用独立编号目录，并分别记录源码、构建、部署和真机证据。
+这里集中保存面向 S5P6818 开发板的嵌入式 Linux、LVGL 和联网终端项目。每个项目使用独立编号目录，并分别记录源码、构建、部署和真机证据。
 
 ## 项目目录
 
 | 编号 | 项目 | 技术方向 | 当前归档证据 |
 | --- | --- | --- | --- |
-| 01 | [LVGL 景区门票自助售票终端](01-lvgl-ticket-terminal/) | GEC6818、嵌入式 Linux、LVGL、framebuffer、evdev、FreeType | 源码与静态资料已归档；当前版本构建和真机验证待补充 |
-| 02 | [医路通 GEC6818 联网智慧医疗自助终端](02-gec6818-clinic-terminal/) | 嵌入式 Linux、LVGL、TCP/JSON、epoll、SQLite | 保留历史构建、测试和用户实机确认；部分原始日志不完整 |
+| 01 | [LVGL 景区门票自助售票终端](01-lvgl-ticket-terminal/) | S5P6818、嵌入式 Linux、LVGL、framebuffer、evdev、FreeType | 源码与静态资料已归档；当前版本构建和真机验证待补充 |
+| 02 | [医路通 S5P6818 联网智慧医疗自助终端](02-s5p6818-clinic-terminal/) | 嵌入式 Linux、LVGL、TCP/JSON、epoll、SQLite | 保留历史构建、测试和用户实机确认；部分原始日志不完整 |
 
 ESP32 实验已独立迁移到 [esp32-learning-labs](https://github.com/Cyw-Elvis-yuwei/esp32-learning-labs)，不在本仓库重复保存。
 
@@ -24,6 +24,6 @@ ESP32 实验已独立迁移到 [esp32-learning-labs](https://github.com/Cyw-Elvi
 - 排除对象文件、构建目录、重复备份和发布压缩包。
 - 未确认许可的字体和第三方素材不进入合集。
 - 必需的第三方源码或库只保留实际构建需要的最小集合，并保留其许可证文件。
-- 本仓库只接收 GEC6818 相关嵌入式 Linux 项目；ESP32、STM32 和 PCB 案例分别进入对应专库。
+- 本仓库只接收 S5P6818 相关嵌入式 Linux 项目；ESP32、STM32 和 PCB 案例分别进入对应专库。
 
 最后整理：2026-08-21。

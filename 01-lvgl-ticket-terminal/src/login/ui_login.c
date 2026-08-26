@@ -1,6 +1,6 @@
 /**
  * @file ui_login.c
- * @brief GEC6818 登录界面模块
+ * @brief S5P6818 登录界面模块
  */
 #include "ui_login.h"
 #include "file_user.h"
