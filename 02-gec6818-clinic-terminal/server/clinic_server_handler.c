@@ -1,12 +1,12 @@
 /*
- * 文件作用（答辩）：服务器的协议入口，把“一帧文本”转换成“一帧响应”。
+ * 文件作用：服务器的协议入口，把“一帧文本”转换成“一帧响应”。
  * 它先识别基础 ping；业务请求则由 clinic_json 严格解码为 ClinicRequest，交给
  * clinic_core_handle()，再把 ClinicResponse 编码成 JSON 返回。
  *
  * Handler 管协议格式，不直接写 SQL，也不负责排队规则。缺字段、重复字段、类型错误、
  * 未知请求和超长响应在这里映射为稳定协议错误，避免非法数据进入业务层。
  *
- * 答辩口诀：Handler 管“格式”。输入是一行 JSON 文本，输出也是一行 JSON 文本；
+ * 实现要点：Handler 管“格式”。输入是一行 JSON 文本，输出也是一行 JSON 文本；
  * 中间使用 ClinicRequest/ClinicResponse 与 Core 对接，因此 Core 不需要依赖 cJSON。
  */
 #include "clinic_server_handler.h"

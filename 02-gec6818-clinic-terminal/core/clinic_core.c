@@ -1,12 +1,12 @@
 /*
- * 文件作用（答辩）：服务器业务核心，统一入口是 clinic_core_handle()。
+ * 文件作用：服务器业务核心，统一入口是 clinic_core_handle()。
  * 它根据 ClinicRequest.type 分发注册、登录、科室、医生、取号、号单查询、叫号和管理台
  * 只读分页请求，做业务参数检查，调用 Store 接口，再把 Store 状态映射成统一响应。
  *
  * Core 管“能不能做、结果代表什么”，但不知道 TCP、JSON、cJSON 或具体 SQL；例如重复
  * 取号时，它把 Store 返回的 ACTIVE_TICKET_EXISTS 转成成功携带原号单的业务响应。
  *
- * 答辩阅读地图：每个 handle_* 对应一种业务；它们先校验业务参数，再调用 clinic_store_*
+ * 阅读地图：每个 handle_* 对应一种业务；它们先校验业务参数，再调用 clinic_store_*
  * 接口，最后把 StoreStatus 翻译成稳定的业务响应。clinic_core_handle() 只负责统一初始化
  * response 和按 request->type 分发，不包含任何 socket、JSON 或 SQL 代码。
  */

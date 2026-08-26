@@ -1,5 +1,5 @@
 /*
- * 文件作用（答辩）：板端四个业务客户端共用的同步 TCP 传输模块。
+ * 文件作用：板端四个业务客户端共用的同步 TCP 传输模块。
  * 它统一完成数值 IPv4 连接、非阻塞 poll 等待、完整发送、接收超时和换行分帧。
  *
  * 关键流程：一次 exchange 共用同一个 CLOCK_MONOTONIC 总截止时间，收到的数据
@@ -7,7 +7,7 @@
  * 超长帧和对端断开返回明确状态。该模块不创建线程、不解析业务 JSON、不调用 LVGL；
  * 调用它的线程由 main.c 管理。
  *
- * 答辩阅读地图：make_deadline 生成一次请求的总截止时间；wait_for_socket 用 poll 等待
+ * 阅读地图：make_deadline 生成一次请求的总截止时间；wait_for_socket 用 poll 等待
  * socket 可读/可写；connect_with_deadline 完成非阻塞连接；send_with_deadline 解决一次
  * send 未必发完；receive_frame_with_deadline 解决一次 recv 未必收到完整消息；exchange
  * 把这些步骤串起来，并在唯一 cleanup 出口关闭 socket。

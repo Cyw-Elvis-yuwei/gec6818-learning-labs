@@ -1,5 +1,5 @@
 /*
- * 文件作用（答辩）：ClinicStore 的 SQLite 具体实现，是服务器唯一直接执行 SQL 的模块。
+ * 文件作用：ClinicStore 的 SQLite 具体实现，是服务器唯一直接执行 SQL 的模块。
  * 启动时创建 users、departments、doctors、tickets 等表并写入基础科室/医生数据；运行时
  * 使用 prepared statement 和参数绑定完成注册、登录查询、医生查询、取号、排队统计，
  * 以及管理台用户/号单的只读游标分页；管理台接口不会返回 password 字段。
@@ -8,7 +8,7 @@
  * 同科室、同日期是否已有 WAITING/CALLED 号单，再分配队列号；叫号按 queue_number ASC、
  * id ASC 选择最早 WAITING 号单，更新为 CALLED 并写入服务器时间，失败统一回滚。
  *
- * 答辩阅读地图：INITIALIZE_SCHEMA_SQL 定义持久化结构；sqlite_create_ticket() 展示防重复
+ * 阅读地图：INITIALIZE_SCHEMA_SQL 定义持久化结构；sqlite_create_ticket() 展示防重复
  * 取号事务；sqlite_get_current_ticket() 组合本人号单、当前叫号和前方人数；
  * sqlite_call_next() 展示叫号事务；clinic_store_sqlite_open() 完成数据库打开和函数表绑定。
  * prepared statement 的固定流程是 prepare -> bind -> step -> column -> finalize。

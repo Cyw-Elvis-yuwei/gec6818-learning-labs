@@ -1,5 +1,5 @@
 /*
- * 文件作用（答辩）：Ubuntu 管理员叫号客户端，不属于普通用户板端权限。
+ * 文件作用：Ubuntu 管理员叫号客户端，不属于普通用户板端权限。
  * 无参数运行时连接本机服务器，先获取真实科室列表并显示数字菜单；选择科室后发送
  * call_next，服务器把当天最早 WAITING 号单更新为 CALLED。支持 d 查数据、r 刷新、q 退出。
  *
@@ -1579,7 +1579,7 @@ static int run_interactive_mode(void)
     return exit_status;
 }
 
-/* 无参数进入答辩演示菜单；四参数模式用于脚本化指定服务器、请求 ID 和科室 ID。 */
+/* 无参数进入演示菜单；四参数模式用于脚本化指定服务器、请求 ID 和科室 ID。 */
 int main(int argc, char **argv)
 {
     const char *host;

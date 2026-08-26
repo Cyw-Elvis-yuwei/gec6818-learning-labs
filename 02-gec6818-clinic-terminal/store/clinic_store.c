@@ -1,5 +1,5 @@
 /*
- * 文件作用（答辩）：Store 抽象接口的安全转发层，用来隔离业务逻辑和具体数据库实现。
+ * 文件作用：Store 抽象接口的安全转发层，用来隔离业务逻辑和具体数据库实现。
  * ClinicStore 内保存 operations 函数表和 context；Core 调用统一的 clinic_store_* 接口，
  * 本文件检查参数和函数指针后，再转发给 SQLite 实现。
  *

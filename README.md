@@ -9,7 +9,7 @@
 | 01 | [LVGL 景区门票自助售票终端](01-lvgl-ticket-terminal/) | GEC6818、嵌入式 Linux、LVGL、framebuffer、evdev、FreeType | 源码与静态资料已归档；当前版本构建和真机验证待补充 |
 | 02 | [医路通 GEC6818 联网智慧医疗自助终端](02-gec6818-clinic-terminal/) | 嵌入式 Linux、LVGL、TCP/JSON、epoll、SQLite | 保留历史构建、测试和用户实机确认；部分原始日志不完整 |
 
-ESP32 实验已独立迁移到 [esp32-learning-labs](https://github.com/brzoskowskatomasz99-alt/esp32-learning-labs)，不在本仓库重复保存。
+ESP32 实验已独立迁移到 [esp32-learning-labs](https://github.com/Cyw-Elvis-yuwei/esp32-learning-labs)，不在本仓库重复保存。
 
 ## 证据口径
 

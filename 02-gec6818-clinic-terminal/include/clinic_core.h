@@ -1,5 +1,5 @@
 /*
- * 文件作用（答辩）：声明服务器业务核心的窄接口。
+ * 文件作用：声明服务器业务核心的窄接口。
  * Core 只持有 ClinicStore 指针，clinic_core_handle() 接收结构化请求并产生结构化响应，
  * 因而可以脱离 TCP、JSON、SQLite 和 LVGL 单独测试业务规则。
  */

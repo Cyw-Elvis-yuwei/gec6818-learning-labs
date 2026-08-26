@@ -1,5 +1,5 @@
 /*
- * 文件作用（答辩）：业务 JSON 与 ClinicRequest/ClinicResponse 结构体之间的严格转换层。
+ * 文件作用：业务 JSON 与 ClinicRequest/ClinicResponse 结构体之间的严格转换层。
  * 解码支持注册、登录、科室、医生、取号、号单查询、叫号和管理台只读分页；编码根据
  * ResponseKind 输出 user_id、departments、doctors、ticket、queue_summary 或管理数据。
  *

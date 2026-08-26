@@ -1,5 +1,5 @@
 /*
- * 文件作用（答辩）：Ubuntu 主机端“按 user_id 查询当天当前号单”客户端。
+ * 文件作用：Ubuntu 主机端“按 user_id 查询当天当前号单”客户端。
  * 它发送 get_current_ticket 并严格解析 Ticket 与 QueueSummary，用于验证当前叫号、
  * 前方等待人数和无号单错误；正式开发板由 ticket_client 执行同类请求。
  */

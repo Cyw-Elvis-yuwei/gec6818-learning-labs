@@ -1,5 +1,5 @@
 /*
- * 文件作用（答辩）：声明 Windows/Linux 共用的 socket 类型和基础网络操作。
+ * 文件作用：声明 Windows/Linux 共用的 socket 类型和基础网络操作。
  * 这里只封装启动、监听、连接、非阻塞、完整发送和关闭；分帧、JSON、业务和数据库
  * 分别由 frame、Handler/Core 和 Store 负责。
  */

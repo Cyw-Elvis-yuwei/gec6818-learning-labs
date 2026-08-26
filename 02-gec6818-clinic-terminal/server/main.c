@@ -1,5 +1,5 @@
 /*
- * 文件作用（答辩）：Ubuntu TCP 服务器入口，负责启动数据库、Core、Handler 和事件循环。
+ * 文件作用：Ubuntu TCP 服务器入口，负责启动数据库、Core、Handler 和事件循环。
  * Linux 下使用 epoll 统一监听服务器 socket 与多个客户端连接；每个连接拥有独立的
  * clinic_frame_buffer，用换行符从 TCP 字节流中提取完整请求。
  *
@@ -7,7 +7,7 @@
  * send 返回 JSON。服务器本文件只负责连接和资源生命周期，不编写 SQL、不复制业务规则；
  * 退出时关闭全部连接、Store 和网络环境。Windows 的 select 分支主要用于主机测试兼容。
  *
- * 答辩阅读地图：main() 装配 SQLite Store、Core 和 Handler；run_epoll_server() 监听事件；
+ * 阅读地图：main() 装配 SQLite Store、Core 和 Handler；run_epoll_server() 监听事件；
  * handle_connection_read() 把 recv 字节送入 frame；handle_frame() 调 Handler 并回发结果。
  * 这体现了“网络层只负责何时收发，Handler 负责收到的内容是什么意思”。
  */

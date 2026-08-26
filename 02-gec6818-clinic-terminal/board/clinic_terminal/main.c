@@ -1,5 +1,5 @@
 /*
- * 文件作用（答辩）：GEC6818 正式终端的程序入口和总控制器。
+ * 文件作用：GEC6818 正式终端的程序入口和总控制器。
  * 这里初始化 framebuffer、触摸、LVGL、中文字体和各业务页面，并保存登录用户 ID。
  *
  * 关键流程：LVGL 主线程接收触摸事件并复制稳定的请求参数，再创建 pthread
@@ -7,7 +7,7 @@
  * 绝不直接操作 LVGL。主循环发现线程结束后执行 pthread_join()，再更新控件、
  * 切换 screen 或删除旧页面，从而避免界面阻塞、数据竞争和 use-after-free。
  *
- * 答辩阅读地图：
+ * 阅读地图：
  * 1. LoginContext 等 RequestContext 保存“线程句柄 + 稳定请求副本 + 返回结果”；
  * 2. 点击回调只校验输入、复制参数并 pthread_create()，不会同步等待网络；
  * 3. *_worker() 只调用业务 client，并把结果写回 Context，绝不调用 LVGL；

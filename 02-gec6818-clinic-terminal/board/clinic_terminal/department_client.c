@@ -1,5 +1,5 @@
 /*
- * 文件作用（答辩）：板端科室列表业务客户端。
+ * 文件作用：板端科室列表业务客户端。
  * 它构造 list_departments JSON 请求，通过 board_transport 收发一条响应，并严格检查
  * ok、request_id、departments 数组、字段类型、数量和额外字段后输出有界科室列表。
  *

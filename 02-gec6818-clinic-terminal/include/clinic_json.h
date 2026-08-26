@@ -1,5 +1,5 @@
 /*
- * 文件作用（答辩）：声明医疗业务 JSON 的严格编解码接口。
+ * 文件作用：声明医疗业务 JSON 的严格编解码接口。
  * decode 把一帧 JSON 转为 ClinicRequest，encode 把 ClinicResponse 转为一帧 JSON；
  * 它是 Handler 与结构化业务层之间的协议适配边界。
  */

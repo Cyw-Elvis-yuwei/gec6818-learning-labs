@@ -1,5 +1,5 @@
 /*
- * 文件作用（答辩）：Ubuntu 主机端按 ticket_id 查询号单的客户端。
+ * 文件作用：Ubuntu 主机端按 ticket_id 查询号单的客户端。
  * 它发送 get_ticket 并解析完整 Ticket，适合验证取号后数据是否已经写入 SQLite；
  * 与按 user_id 查询当天最新号单的 host_current_ticket_client 含义不同。
  */

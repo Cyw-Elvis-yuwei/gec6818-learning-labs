@@ -1,5 +1,5 @@
 /*
- * 文件作用（答辩）：显示服务器返回的科室列表，并按当前 ClinicServiceFlow 决定点击行为。
+ * 文件作用：显示服务器返回的科室列表，并按当前 ClinicServiceFlow 决定点击行为。
  * 科室查询模式只显示科室信息；医生查询模式把 department_id 交给医生请求；门诊取号
  * 模式先弹出确认框，再把 user_id/department_id 所需信息交给上层创建号单。
  *

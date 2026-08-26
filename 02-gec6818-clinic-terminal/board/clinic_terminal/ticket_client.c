@@ -1,5 +1,5 @@
 /*
- * 文件作用（答辩）：板端号单业务客户端，负责 create_ticket 和 get_current_ticket。
+ * 文件作用：板端号单业务客户端，负责 create_ticket 和 get_current_ticket。
  * 取号只发送 user_id 与 department_id，不携带 doctor_id；当前号单查询还会严格解析
  * queue_summary，用于显示当前叫号和本人前方 WAITING 人数。
  *

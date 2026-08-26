@@ -1,5 +1,5 @@
 /*
- * 文件作用（答辩）：项目跨层共享的数据模型和业务枚举。
+ * 文件作用：项目跨层共享的数据模型和业务枚举。
  * ClinicRequest/ClinicResponse 是 Handler 与 Core 的结构化边界；ClinicDepartment、
  * ClinicDoctor、ClinicTicket、ClinicQueueSummary 描述服务器和客户端共同理解的数据。
  * 固定容量和状态枚举集中定义，避免各模块自行猜测字段长度或号单状态。

@@ -1,5 +1,5 @@
 /*
- * 文件作用（答辩）：Ubuntu 主机端门诊取号客户端。
+ * 文件作用：Ubuntu 主机端门诊取号客户端。
  * 它发送 create_ticket(user_id, department_id) 并展示真实号单，供 TCP 集成测试和排障；
  * 请求不包含 doctor_id，重复取号是否返回原号单由服务器业务层决定。
  */

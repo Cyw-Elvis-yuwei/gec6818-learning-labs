@@ -1,5 +1,5 @@
 /*
- * 文件作用（答辩）：声明 SQLite Store 的创建入口。
+ * 文件作用：声明 SQLite Store 的创建入口。
  * clinic_store_sqlite_open() 打开数据库、初始化表和基础数据，并把 SQLite operations/context
  * 安装到 ClinicStore；之后 Core 仍只通过 clinic_store.h 的抽象接口访问数据。
  */

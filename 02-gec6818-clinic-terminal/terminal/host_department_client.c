@@ -1,5 +1,5 @@
 /*
- * 文件作用（答辩）：Ubuntu 主机端科室查询客户端。
+ * 文件作用：Ubuntu 主机端科室查询客户端。
  * 它发送 list_departments 并打印服务器返回的真实科室，主要用于脱离 LVGL 验证
  * TCP、Handler、Core、Store 和 SQLite 科室链路，不是开发板正式界面。
  */

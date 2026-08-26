@@ -1,5 +1,5 @@
 /*
- * 文件作用（答辩）：声明服务器 Handler 的一帧请求/一帧响应接口。
+ * 文件作用：声明服务器 Handler 的一帧请求/一帧响应接口。
  * Handler 持有 Core 指针，负责协议解码、调用 clinic_core_handle() 和响应编码；
  * socket 与 epoll 在 server/main.c，业务规则在 Core，SQL 在 Store/SQLite。
  */

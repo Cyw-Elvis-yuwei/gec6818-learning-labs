@@ -1,5 +1,5 @@
 /*
- * 文件作用（答辩）：定义 Core 可见的统一数据访问接口。
+ * 文件作用：定义 Core 可见的统一数据访问接口。
  * ClinicStoreOperations 是函数表，ClinicStore 同时保存函数表和实现上下文；SQLite 打开后
  * 填入这些函数指针，Core 始终调用 clinic_store_*，不直接依赖 sqlite3。
  * StoreStatus 用于区分重复、未找到、无等待号单、数据库错误等数据层结果。

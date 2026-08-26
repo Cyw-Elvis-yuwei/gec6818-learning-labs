@@ -1,12 +1,12 @@
 /*
- * 文件作用（答辩）：基础协议工具，主要处理 ping/pong、通用 error 和 JSON 外层合法性。
+ * 文件作用：基础协议工具，主要处理 ping/pong、通用 error 和 JSON 外层合法性。
  * 它实现有界扫描，检查 JSON 对象、字符串、数字、嵌套深度和 request_id，避免未终止文本、
  * 超长消息或非法 JSON 进入后续处理。
  *
  * 注意：注册、登录、医生和号单等业务字段由 clinic_json.c 处理；本文件不是 Core，也不
  * 访问 Store。两者分工是“基础探活协议”和“医疗业务 JSON”。
  *
- * 答辩阅读地图：前半部分是无动态内存的 JSON 语法扫描器；parse_top_level_request_fields
+ * 阅读地图：前半部分是无动态内存的 JSON 语法扫描器；parse_top_level_request_fields
  * 只提取基础 type/request_id；parse_request 识别 ping；encode_ping/pong/error 负责生成
  * 可直接通过换行分帧发送的基础消息。
  */
